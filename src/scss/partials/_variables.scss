@@ -1,0 +1,25 @@
+$xxl: 1399.98px;
+$xl: 1199.98px;
+$lg: 991.98px;
+$md: 767.98px;
+$sm: 575.98px;
+
+:root {  
+  --container: 1440px;
+
+  @media(max-width: $xl) {
+    --container: 0px;
+  }
+
+  @media(max-width: $lg) {
+    --container: 0px;
+  }
+
+  @media(max-width: $md) {
+    --container: 0px;
+  }
+
+  @media(max-width: $sm) {
+    --container: 100%;
+  }
+}
