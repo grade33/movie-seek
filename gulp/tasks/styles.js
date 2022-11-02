@@ -16,7 +16,7 @@ export const styles = () => {
       includePaths: ['node_modules'],
       outputStyle: 'expanded'
     }))
-    .pipe(app.plugins.replace(/@img\//g, 'img/'))
+    .pipe(app.plugins.replace(/@img\//g, './img/'))
     .pipe(app.plugins.if(app.isBuild, groupCssMediaQueries()))
     .pipe(app.plugins.if(app.isBuild, webpcss({
       webpClass: ".webp",
