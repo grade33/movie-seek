@@ -6,7 +6,70 @@ html(lang="ru")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Document
-    link(rel="stylesheet", href="./css/style.min.css")
-    script(defer src="./js/app.min.js")
+    link(rel="stylesheet", href="./style.min.css")
+    script(defer src="./app.min.js")
   body
-    
+    #app 
+      .background
+      .header 
+        .container.header__container 
+          a.header__logo.logo.logo_active(href="#") 
+            span.logo__text M
+            |ovie
+            span.logo__text S
+            |eek
+          nav.nav
+            a.nav__link(href="#") Фильмы
+            a.nav__link(href="#") Сериалы
+            a.nav__link(href="#") Мультфильмы
+            a.nav__link(href="#") Аниме
+            a.nav__link(href="#") Актеры
+          form.header__search(action="GET") 
+            input.header__search-field(type="search" placeholder="Поиск")
+            button.header__search-btn(type="submit") 
+              svg.header__search-icon
+                use(xlink:href="@img/sprite.svg#loupe")
+      main.main 
+        section.main-movie
+          .container.main-movie__container 
+            a.main-movie__content(href="#") 
+              .main-movie__empty-space
+              .main-movie__info
+                h3.main-movie__title Дом дракона
+                p.main-movie__desc Таргариены ведут друг с другом ожесточенную борьбу за Железный трон. Самый долгожданный сериал года
+                ul.main-movie__structure
+                  li.main-movie__structure-item
+                    span.main-movie__structure-title В главных ролях:&nbsp;
+                    span.main-movie__structure-text Юрий Колокольников, Семён Трескунов, Ксения Раппопорт
+                  li.main-movie__structure-item
+                    span.main-movie__structure-title Режиссер:&nbsp;
+                    span.main-movie__structure-text Александр Незлобин
+              img.main-movie__poster(src="@img/movie-preview/preview-big-1.jpg", alt="Постер к главному фильму")
+        section.movie-collection
+          .container.movie-collection__container 
+            h2.movie-collection__section-title Новые фильмы
+            ul.movie-collection__list
+              li.movie-collection__item
+                a.movie-collection__link(href="#") 
+                img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg", alt="Постер к главному фильму")
+                h3.movie-collection__title Название какого-то фильма
+              li.movie-collection__item
+                a.movie-collection__link(href="#") 
+                img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg", alt="Постер к главному фильму")
+                h3.movie-collection__title Название какого-то фильма
+              li.movie-collection__item
+                a.movie-collection__link(href="#") 
+                img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg", alt="Постер к главному фильму")
+                h3.movie-collection__title Название какого-то фильма
+              li.movie-collection__item
+                a.movie-collection__link(href="#") 
+                img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg", alt="Постер к главному фильму")
+                h3.movie-collection__title Название какого-то фильма
+              li.movie-collection__item
+                a.movie-collection__link(href="#") 
+                img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg", alt="Постер к главному фильму")
+                h3.movie-collection__title Название какого-то фильма
+              li.movie-collection__item
+                a.movie-collection__link(href="#") 
+                img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg", alt="Постер к главному фильму")
+                h3.movie-collection__title Название какого-то фильма

@@ -7,7 +7,7 @@ export const markup = () => {
       pretty: app.isBuild ? false : true,
     }))
     .pipe(app.plugins.replace(/@img\//g, 'img/'))
-    .pipe(webpHtmlNosvg())
+    .pipe(app.plugins.if(app.isBuild, webpHtmlNosvg()))
     .pipe(app.gulp.dest(app.path.build.markup))
     .pipe(app.plugins.browsersync.stream())
 }

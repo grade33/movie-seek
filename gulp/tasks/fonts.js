@@ -57,21 +57,21 @@ export const fontStyle = () => {
           if (newFileOnly !== fontFileName) {
             let fontName = fontFileName.split('-')[0] ? fontFileName.split('-')[0] : fontFileName;
             let fontWeight = fontFileName.split('-')[1] ? fontFileName.split('-')[1] : fontFileName;
-            if (fontWeight.toLowerCase() === 'thin') {
+            if (fontWeight.toLowerCase() === 'thin' || fontWeight.toLowerCase() == 100) {
               fontWeight = 100;
-            } else if (fontWeight.toLowerCase() === 'extralight') {
+            } else if (fontWeight.toLowerCase() === 'extralight' || fontWeight.toLowerCase() == 200) {
               fontWeight = 200;
-            } else if (fontWeight.toLowerCase() === 'light') {
+            } else if (fontWeight.toLowerCase() === 'light' || fontWeight.toLowerCase() == 300) {
               fontWeight = 300;
-            } else if (fontWeight.toLowerCase() === 'medium') {
+            } else if (fontWeight.toLowerCase() === 'medium' || fontWeight.toLowerCase() == 500) {
               fontWeight = 500;
-            } else if (fontWeight.toLowerCase() === 'semibold') {
+            } else if (fontWeight.toLowerCase() === 'semibold' || fontWeight.toLowerCase() == 600) {
               fontWeight = 600;
-            } else if (fontWeight.toLowerCase() === 'bold') {
+            } else if (fontWeight.toLowerCase() === 'bold' || fontWeight.toLowerCase() == 700) {
               fontWeight = 700;
-            } else if (fontWeight.toLowerCase() === 'extrabold' || fontWeight.toLowerCase() === 'heavy') {
+            } else if (fontWeight.toLowerCase() === 'extrabold' || fontWeight.toLowerCase() === 'heavy' || fontWeight.toLowerCase() == 800) {
               fontWeight = 800;
-            } else if (fontWeight.toLowerCase() === 'black') {
+            } else if (fontWeight.toLowerCase() === 'black' || fontWeight.toLowerCase() == 900) {
               fontWeight = 900;
             } else {
               fontWeight = 400;

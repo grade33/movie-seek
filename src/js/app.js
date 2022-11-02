@@ -1,1 +1,3 @@
-import main from "./modules/main.js";
+import * as functions from "./modules/main.js";
+
+functions.setMainMovieInfoWidth()

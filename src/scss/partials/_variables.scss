@@ -5,6 +5,12 @@ $md: 767.98px;
 $sm: 575.98px;
 
 :root {  
+  --background: #1f2b35;
+  --blue: #374151;
+  --cyan: #00b9ae;
+  --white: #f9f9f9;
+  --gray: #868686;
+
   --container: 1440px;
 
   @media(max-width: $xl) {
