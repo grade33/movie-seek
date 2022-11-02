@@ -110,8 +110,9 @@
   }
 
   &__poster {
-    margin-left: auto;
+    max-width: 40%;
     height: 100%;
+    margin-left: auto;
     object-fit: contain;
     border-radius: 40px;
     animation: poster-zoom 7s ease-in-out infinite alternate-reverse;
