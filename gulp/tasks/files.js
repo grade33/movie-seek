@@ -1,5 +1,5 @@
 export const files = () => {
-  return app.gulp.src(app.path.src.files)
-    .pipe(app.gulp.dest(app.path.build.files))
-    .pipe(app.plugins.browsersync.stream())
-}
+  return global.app.gulp.src(global.app.path.src.files)
+    .pipe(global.app.gulp.dest(global.app.path.build.files))
+    .pipe(global.app.plugins.browsersync.stream());
+};

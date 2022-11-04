@@ -2,12 +2,12 @@ import pug from 'gulp-pug';
 import webpHtmlNosvg from 'gulp-webp-html-nosvg';
 
 export const markup = () => {
-  return app.gulp.src(app.path.src.markup)
+  return global.app.gulp.src(global.app.path.src.markup)
     .pipe(pug({
-      pretty: app.isBuild ? false : true,
+      pretty: global.app.isBuild ? false : true,
     }))
-    .pipe(app.plugins.replace(/@img\//g, 'img/'))
-    .pipe(app.plugins.if(app.isBuild, webpHtmlNosvg()))
-    .pipe(app.gulp.dest(app.path.build.markup))
-    .pipe(app.plugins.browsersync.stream())
-}
+    .pipe(global.app.plugins.replace(/@img\//g, 'img/'))
+    .pipe(global.app.plugins.if(global.app.isBuild, webpHtmlNosvg()))
+    .pipe(global.app.gulp.dest(global.app.path.build.markup))
+    .pipe(global.app.plugins.browsersync.stream());
+};

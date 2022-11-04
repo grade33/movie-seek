@@ -1,0 +1,27 @@
+.slider {
+  position: relative;
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__slide {
+    position: relative;
+    flex: none;
+    width: 100%;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    font-size: 0;
+    &_prev {
+      left: 0;
+    }
+    &_next {
+      right: 0;
+    }
+  }
+}

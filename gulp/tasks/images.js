@@ -1,14 +1,14 @@
 import webp from 'gulp-webp';
 
 export const images = () => {
-  return app.gulp.src(app.path.src.images)
-    .pipe(app.plugins.newer(app.path.build.images))
-    .pipe(app.plugins.if(app.isBuild, webp()))
-    .pipe(app.plugins.if(app.isBuild, app.gulp.dest(app.path.build.images)))
-    .pipe(app.plugins.if(app.isBuild, app.gulp.src(app.path.src.images)))
-    .pipe(app.plugins.if(app.isBuild, app.plugins.newer(app.path.build.images)))
-    .pipe(app.gulp.dest(app.path.build.images))
-    .pipe(app.gulp.src(app.path.src.svg))
-    .pipe(app.gulp.dest(app.path.build.images))
-    .pipe(app.plugins.browsersync.stream())
-}
+  return global.app.gulp.src(global.app.path.src.images)
+    .pipe(global.app.plugins.newer(global.app.path.build.images))
+    .pipe(global.app.plugins.if(global.app.isBuild, webp()))
+    .pipe(global.app.plugins.if(global.app.isBuild, global.app.gulp.dest(global.app.path.build.images)))
+    .pipe(global.app.plugins.if(global.app.isBuild, global.app.gulp.src(global.app.path.src.images)))
+    .pipe(global.app.plugins.if(global.app.isBuild, global.app.plugins.newer(global.app.path.build.images)))
+    .pipe(global.app.gulp.dest(global.app.path.build.images))
+    .pipe(global.app.gulp.src(global.app.path.src.svg))
+    .pipe(global.app.gulp.dest(global.app.path.build.images))
+    .pipe(global.app.plugins.browsersync.stream());
+};

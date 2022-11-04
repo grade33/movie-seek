@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "choices.js": "^10.1.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "swiper": "^8.4.4"
   }
 }

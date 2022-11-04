@@ -1,10 +1,14 @@
-import webpack from "webpack";
+import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import webpackConfig from '../../webpack.config.js';
 
 export const scripts = () => {
-  return app.gulp.src(app.path.src.scripts)
+  return global.app.gulp.src(global.app.path.src.scripts, {
+      sourcemaps: global.app.isDev
+    })
     .pipe(webpackStream(webpackConfig), webpack)
-    .pipe(app.gulp.dest(app.path.build.scripts))
-    .pipe(app.plugins.browsersync.stream())
-}
+    .pipe(global.app.gulp.dest(global.app.path.build.scripts), {
+      sourcemaps: global.app.isDev
+    })
+    .pipe(global.app.plugins.browsersync.stream());
+};

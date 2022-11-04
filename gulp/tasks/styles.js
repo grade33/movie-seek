@@ -6,35 +6,35 @@ import webpcss from 'gulp-webpcss';
 import autoprefixer from 'gulp-autoprefixer';
 import groupCssMediaQueries from 'gulp-group-css-media-queries';
 
-const sass = gulpSass(dartSass)
+const sass = gulpSass(dartSass);
 
 export const styles = () => {
-  return app.gulp.src(app.path.src.styles, {
-      sourcemaps: app.isDev
+  return global.app.gulp.src(global.app.path.src.styles, {
+      sourcemaps: global.app.isDev
     })
     .pipe(sass({
       includePaths: ['node_modules'],
       outputStyle: 'expanded'
     }))
-    .pipe(app.plugins.replace(/@img\//g, './img/'))
-    .pipe(app.plugins.if(app.isBuild, groupCssMediaQueries()))
-    .pipe(app.plugins.if(app.isBuild, webpcss({
-      webpClass: ".webp",
-      noWebpClass: ".no-webp"
+    .pipe(global.app.plugins.replace(/@img\//g, './img/'))
+    .pipe(global.app.plugins.if(global.app.isBuild, groupCssMediaQueries()))
+    .pipe(global.app.plugins.if(global.app.isBuild, webpcss({
+      webpClass: '.webp',
+      noWebpClass: '.no-webp'
     })))
-    .pipe(app.plugins.if(app.isBuild, autoprefixer({
+    .pipe(global.app.plugins.if(global.app.isBuild, autoprefixer({
       grid: true,
       cascade: false,
-      overrideBrowserslist: ["last 5 versions"],
+      overrideBrowserslist: ['last 5 versions'],
     })))
-    .pipe(app.plugins.if(app.isBuild, cleanCss({
+    .pipe(global.app.plugins.if(global.app.isBuild, cleanCss({
       level: 2
     })))
     .pipe(rename({
-      extname: ".min.css"
+      extname: '.min.css'
     }))
-    .pipe(app.gulp.dest(app.path.build.styles, {
-      sourcemaps: app.isDev
+    .pipe(global.app.gulp.dest(global.app.path.build.styles, {
+      sourcemaps: global.app.isDev
     }))
-    .pipe(app.plugins.browsersync.stream())
-}
+    .pipe(global.app.plugins.browsersync.stream());
+};

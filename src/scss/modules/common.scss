@@ -3,13 +3,33 @@ body {
   font-weight: 400;
   font-size: 16px;
   color: var(--white);
-  height: 2000px;
 }
 
 .container {
   padding: 0 15px;
   max-width: var(--container);
   margin: 0 auto;
+}
+
+section {
+  position: relative;
+}
+
+input {
+  padding: 13px 18px;
+  border-radius: 37px;
+  background: var(--blue);
+  border: 2px solid #3e596e;
+  transition: border-color .3s ease-in-out;
+
+  &::placeholder {
+    color: var(--gray);
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--cyan);
+  }
 }
 
 .background {
@@ -31,34 +51,52 @@ body {
   font-size: 32px;
   letter-spacing: 0.07em;
   font-weight: 700;
-  padding: 14px 17px;
-  color: var(--white);
-  background: rgba(65, 65, 65);
-  border-radius: 12px;
-  transition: color .3s ease-in-out;
 
   &__text {
-    transition: color .3s ease-in-out;
-  }
-
-  &:hover,
-  &_active {
-    .logo__text {
-      color: var(--cyan);
-    }
+    color: var(--cyan);
   }
 }
 
 .nav {
-  font-family: 'Montserrat', sans-serif;
-  margin-right: auto;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 30px;
+  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
-  font-weight: 500;
+  margin-right: auto;
 
   &__link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &:hover,
+    &_active {
+      .nav__text::after {
+        width: 100%;
+        background: var(--cyan);
+      }
+      .nav__icon {
+        color: var(--cyan);
+      }
+    }
+
+    &_active {
+      .nav__text {
+        color: var(--cyan);
+      }
+
+    }
+  }
+
+  &__icon {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    transition: color .3s ease-in-out;
+  }
+
+  &__text {
     position: relative;
     transition: color .3s ease-in-out;
 
@@ -75,38 +113,5 @@ body {
       transition: background-color .3s ease-in-out,
         width .3s ease-in-out;
     }
-
-    &:hover {
-      &::after {
-        width: 100%;
-        background: var(--cyan);
-      }
-    }
-
-    &_active {
-      color: var(--cyan);
-
-      &::after {
-        width: 100%;
-        background: var(--cyan);
-      }
-    }
-  }
-}
-
-input {
-  padding: 13px 18px;
-  border-radius: 37px;
-  background: var(--blue);
-  border: 2px solid #3e596e;
-  transition: border-color .3s ease-in-out;
-
-  &::placeholder {
-    color: var(--gray);
-  }
-
-  &:hover,
-  &:focus-visible {
-    border-color: var(--cyan);
   }
 }

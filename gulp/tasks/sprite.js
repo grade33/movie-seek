@@ -1,9 +1,9 @@
-import svgSprite from 'gulp-svg-sprite'
-import svgmin from 'gulp-svgmin'
-import cheerio from 'gulp-cheerio'
+import svgSprite from 'gulp-svg-sprite';
+import svgmin from 'gulp-svgmin';
+import cheerio from 'gulp-cheerio';
 
 export const sprite = () => {
-  return app.gulp.src(app.path.src.sprite)
+  return global.app.gulp.src(global.app.path.src.sprite)
     .pipe(svgmin({
         js2svg: {
           pretty: true,
@@ -23,10 +23,10 @@ export const sprite = () => {
     .pipe(svgSprite({
       mode: {
         stack: {
-          sprite: `../sprite.svg`,
+          sprite: '../sprite.svg',
         }
       }
     }))
-    .pipe(app.gulp.dest(app.path.build.images))
-    .pipe(app.plugins.browsersync.stream())
-}
+    .pipe(global.app.gulp.dest(global.app.path.build.images))
+    .pipe(global.app.plugins.browsersync.stream());
+};
