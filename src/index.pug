@@ -11,13 +11,10 @@ html(lang="ru")
   body
     #app 
       .background
+
       .header 
         .container.header__container 
-          a.header__logo.logo.logo_active(href="#") 
-            span.logo__text M
-            |ovie
-            span.logo__text S
-            |eek
+          +logo('logo_active header__logo', '#')
           form.header__search(action="GET") 
             input.header__search-field(type="search" placeholder="Поиск")
             button.header__search-btn(type="submit") 
@@ -26,6 +23,7 @@ html(lang="ru")
           .header__sign
             button.header__sign-btn.header__sign-in(type="button") Войти
             button.header__sign-btn.header__sign-up(type="button") Зарегистрироватся
+
       .content
         .container.content__container
           aside.aside
@@ -51,6 +49,7 @@ html(lang="ru")
                   svg.nav__icon
                     use(xlink:href="@img/sprite.svg#actor")
                   span.nav__text Актеры
+
           main.main 
             section.main-movie
               .container
@@ -67,11 +66,12 @@ html(lang="ru")
                       li.main-movie__structure-item
                         span.main-movie__structure-title Режиссер:&nbsp;
                         span.main-movie__structure-text Александр Незлобин
-                  img.main-movie__poster(src="@img/movie-preview/preview-big-1.jpg" alt="Постер к главному фильму")
+                  .main-movie__poster-wrap
+                    img.main-movie__poster(src="@img/movie-preview/preview-big-1.jpg" alt="Постер к главному фильму")
 
             section.movie-collection
               .container.movie-collection__container 
-                h2.movie-collection__section-title Новые фильмы
+                h2.movie-collection__section-title Новинки
                 .slider.movie-collection__slider
                   button.slider__btn.slider__btn_prev(type="button") 
                     svg
@@ -82,68 +82,64 @@ html(lang="ru")
                   ul.slider__wrapper
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 7.1
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                          span.rating 2.4
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                          span.rating 4.9
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                          span.rating 5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 9.5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                          span.rating 5.4
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                          span.rating 6.7
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
 
             section.movie-collection
               .container.movie-collection__container 
-                h2.movie-collection__section-title Новые сериалы
+                h2.movie-collection__section-title Сейчас смотрят
                 .slider.movie-collection__slider
                   button.slider__btn.slider__btn_prev(type="button") 
                     svg
@@ -154,68 +150,64 @@ html(lang="ru")
                   ul.slider__wrapper
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 7.1
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                          span.rating 2.4
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                          span.rating 4.9
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                          span.rating 5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
+                          span.rating 9.5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
+                          span.rating 5.4
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 6.7
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
-                    li.slider__slide
-                      a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
-                        .movie-collection__text-block
-                          h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
 
             section.movie-collection
               .container.movie-collection__container 
-                h2.movie-collection__section-title Новые мультфильмы
+                h2.movie-collection__section-title Фильмы 
                 .slider.movie-collection__slider
                   button.slider__btn.slider__btn_prev(type="button") 
                     svg
@@ -226,61 +218,160 @@ html(lang="ru")
                   ul.slider__wrapper
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 7.1
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                          span.rating 2.4
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                          span.rating 4.9
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                          span.rating 5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
+                          span.rating 9.5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
+                          span.rating 5.4
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 6.7
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
+
+            section.movie-collection
+              .container.movie-collection__container 
+                h2.movie-collection__section-title Сериалы 
+                .slider.movie-collection__slider
+                  button.slider__btn.slider__btn_prev(type="button") 
+                    svg
+                      use(xlink:href="@img/sprite.svg#chevron")
+                  button.slider__btn.slider__btn_next(type="button") 
+                    svg
+                      use(xlink:href="@img/sprite.svg#chevron")
+                  ul.slider__wrapper
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 7.1
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
+                          span.rating 2.4
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
+                          span.rating 4.9
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
+                          span.rating 5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
                     li.slider__slide
                       a.movie-collection__link(href="#") 
-                        img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-5.jpg" alt="Постер к главному фильму")
+                          span.rating 9.5
                         .movie-collection__text-block
                           h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
+                    li.slider__slide
+                      a.movie-collection__link(href="#") 
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-6.jpg" alt="Постер к главному фильму")
+                          span.rating 5.4
+                        .movie-collection__text-block
+                          h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
+                    li.slider__slide
+                      a.movie-collection__link(href="#") 
+                        .movie-collection__poster-wrap
+                          img.movie-collection__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
+                          span.rating 6.7
+                        .movie-collection__text-block
+                          h3.movie-collection__title Название какого-то фильма
+                          span.movie-collection__year-genre 2022 Триллер
+
+      footer.footer
+        .container
+          .footer__container
+            .footer__top.row
+              .footer__block.col-3
+                +logo('col-3 logo_active footer__logo', '#')
+              .footer__block.col-2
+                .footer__title Навигация
+                ul.footer__list 
+                  li.footer__item 
+                    a.footer__text(href="#") Главная
+                  li.footer__item 
+                    a.footer__text(href="#") Новости
+                  li.footer__item 
+                    a.footer__text(href="#") Фильмы
+                  li.footer__item 
+                    a.footer__text(href="#") Сериалы
+                  li.footer__item 
+                    a.footer__text(href="#") Актеры
+              .footer__block.col-2
+                .footer__title Аккаунт
+                ul.footer__list 
+                  li.footer__item 
+                    button.footer__text(type="button") Вход
+                  li.footer__item 
+                    button.footer__text(type="button") Регистрация
+            .footer__bottom 
+              span.footer__copyright Copyright © 2022. All rights reserved.
+              .footer__info
+                a.footer__info-link(href='#') Terms of use
+                a.footer__info-link(href='#') Privacy policy
+
+
+

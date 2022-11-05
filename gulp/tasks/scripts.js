@@ -1,14 +1,27 @@
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
-import webpackConfig from '../../webpack.config.js';
 
 export const scripts = () => {
-  return global.app.gulp.src(global.app.path.src.scripts, {
-      sourcemaps: global.app.isDev
-    })
-    .pipe(webpackStream(webpackConfig), webpack)
-    .pipe(global.app.gulp.dest(global.app.path.build.scripts), {
-      sourcemaps: global.app.isDev
-    })
+  return global.app.gulp.src(global.app.path.src.scripts)
+    .pipe(webpackStream({
+      mode: global.app.isBuild ? 'production' : 'development',
+      output: {
+        filename: 'app.min.js'
+      },
+      devtool: global.app.isDev ? 'source-map' : false,
+      module: {
+        rules: [{
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        }]
+      },
+    }), webpack)
+    .pipe(global.app.gulp.dest(global.app.path.build.scripts))
     .pipe(global.app.plugins.browsersync.stream());
 };

@@ -3,9 +3,10 @@ import { Slider } from './libs/slider.js';
 
 new Slider('.movie-collection__slider', {
   gap: '20',
-  slidePerView: 5,
+  slidePerView: 6,
   speed: 500,
-  slidePerGroup: 3,
+  slidePerGroup: 4,
 });
 
 functions.setPaddingStantHeader();
+functions.setColorRatingText();

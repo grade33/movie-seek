@@ -3,16 +3,23 @@ $xl: 1199.98px;
 $lg: 991.98px;
 $md: 767.98px;
 $sm: 575.98px;
-
+body {
+  color: #0c0c0c;
+  color: #050801;
+}
 :root {
-  --background: #1f2b35;
-  --blue: #374151;
-  --cyan: #03e9f4;      
-  --orange: #ffa200;
   --white: #f9f9f9;
+  --black: #0c0c0c;
   --gray: #afafaf;
+  --gray-dark: #808080;
+  --cyan: #02D3DE;      
+  --cyan-dark: #029AA2;
+  --blue: #233c4a;
+  --blue-light: #234854;
+  --bg: #022B3A;
 
   --container: 1440px;
+  --gap: 16px;
 
   @media(max-width: $xl) {
     --container: 0px;
