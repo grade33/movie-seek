@@ -1,4 +1,4 @@
-import { SingleSlider } from './singleSlider.js';
+import { SingleSlider } from './SingleSlider.js';
 
 export class Slider {
   constructor(selector, obj) {

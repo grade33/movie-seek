@@ -1,5 +1,13 @@
-import { Slider } from './libs/slider.js';
- import * as functions from './modules/main.js';
+import { Slider } from './libs/Slider.js';
+
+import { RenderPage } from './modules/RenderPage.js';
+
+import * as functions from './modules/main.js';
+
+functions.setPaddingStantHeader();
+functions.setColorRatingText();
+functions.openCloseGenreFilter();
+functions.selectGenre();
 
 new Slider('.movie-collection__slider', {
   gap: '20',
@@ -8,5 +16,4 @@ new Slider('.movie-collection__slider', {
   slidePerGroup: 4,
 });
 
-functions.setPaddingStantHeader();
-functions.setColorRatingText();
+new RenderPage();

@@ -6,31 +6,35 @@ export class SingleSlider {
     slidePerView = 1,
     slidePerGroup = 1,
     speed = 300,
+    mainSelector = '.slider'
   }) {
-    // Selector
-    this.mainSelector = '.slider';
 
-    // DOM Elements
     this.slider = slider;
-    this.wrapper = this.slider.querySelector(`${this.mainSelector}__wrapper`);
-    this.slides = this.slider.querySelectorAll(`${this.mainSelector}__slide`);
-    this.btnPrev = this.slider.querySelector(`${this.mainSelector}__btn_prev`);
-    this.btnNext = this.slider.querySelector(`${this.mainSelector}__btn_next`);
-
-    // Settings
+    this.mainSelector = mainSelector;
     this.slidePerView = slidePerView;
     this.slidePerGroup = slidePerGroup;
     this.gap = gap;
     this.speed = speed;
     this.activeSlide = 0;
 
-    // Functions Call
+    this.initialStartMethods();
+  }
+  
+  initialStartMethods() {
+    this.initDOMElements();
     this.setSlidesWidth();
     this.setGap();
     this.setSlidesSpeed();
-    this.setActiveSlide();    
+    this.setActiveSlide();
     this.btnPrev.addEventListener('click', this.prevSlide.bind(this));
     this.btnNext.addEventListener('click', this.nextSlide.bind(this));
+  }
+
+  initDOMElements() {
+    this.wrapper = this.slider.querySelector(`${this.mainSelector}__wrapper`);
+    this.slides = this.slider.querySelectorAll(`${this.mainSelector}__slide`);
+    this.btnPrev = this.slider.querySelector(`${this.mainSelector}__btn_prev`);
+    this.btnNext = this.slider.querySelector(`${this.mainSelector}__btn_next`);
   }
 
   setSlidesWidth() {
@@ -75,10 +79,9 @@ export class SingleSlider {
     if (prevOrNext === 'prev') {
       this.activeSlide -= this.slidePerGroup;
       this.activeSlide = this.activeSlide < 0 ? 0 : this.activeSlide;
-    }
-    else if (prevOrNext === 'next') {
-      if(this.slides[this.slides.length - this.slidePerView].classList.contains('slider__slide_active')) return false;
-      this.activeSlide += this.slidePerGroup; 
+    } else if (prevOrNext === 'next') {
+      if (this.slides[this.slides.length - this.slidePerView].classList.contains('slider__slide_active')) return false;
+      this.activeSlide += this.slidePerGroup;
       this.activeSlide = this.activeSlide > this.slides.length - this.slidePerView ? this.slides.length - this.slidePerView : this.activeSlide;
     }
 
