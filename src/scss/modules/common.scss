@@ -124,6 +124,9 @@ input {
 
 .movie-card {
   &__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     position: relative;
     z-index: 3;
     width: 100%;
@@ -143,7 +146,6 @@ input {
   &__poster {
     &-wrap {
       position: relative;
-      height: 260px;
       margin-bottom: 8px;
 
       &::before {
@@ -164,6 +166,12 @@ input {
     border-radius: 17px;
   }
 
+  &__text-block {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
   &__title {
     font-size: 15px;
     font-weight: 500;
@@ -176,6 +184,7 @@ input {
   }
 
   &__year-genre {
+    margin-top: auto;
     font-size: 15px;
     color: var(--gray);
     overflow: hidden;

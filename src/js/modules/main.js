@@ -7,46 +7,49 @@ export function setPaddingStantHeader() {
 }
 
 export function setColorRatingText() {
-  document.querySelectorAll('.rating').forEach(rate => {
+  document.querySelectorAll('.rating').forEach((rate) => {
     if (+rate.innerHTML > 7) rate.style.background = '#007b00';
     else if (+rate.innerHTML < 5) rate.style.background = '#ff0b0b';
   });
 }
 
 export function openCloseGenreFilter() {
-  const genre = document.querySelector('.movie-genre__filter');
-  const gentrBtn = genre.querySelector('.movie-genre__filter-btn');
-  const gentrList = genre.querySelector('.movie-genre__filter-list');
+  document.addEventListener('click', (e) => {
+    const genreBtn = e.target.closest('.movie-genre__filter-btn');
+    if (!e.target.closest('.movie-genre__filter-btn')) return;
 
-  gentrList.hiddem = true;
+    const genre = e.target.closest('.movie-genre__filter');
+    const genreList = genre.querySelector('.movie-genre__filter-list');
 
-  gentrBtn.addEventListener('click', () => {
-    if (gentrList.classList.contains('movie-collection__genre-list_active')) {
-      gentrList.classList.remove('movie-collection__genre-list_active');
-      gentrList.addEventListener('transitionend', hideElem);
+    if (genreList.classList.contains('movie-genre__filter-list_active')) {
+      genreList.classList.remove('movie-genre__filter-list_active');
+      genreList.addEventListener('transitionend', hideElem);
 
       return;
     }
 
     function hideElem() {
-      gentrList.hidden = true;
-      gentrList.style.top = '';
-      gentrList.style.bottom = '';
-      gentrList.removeEventListener('transitionend', hideElem);
+      genreList.hidden = true;
+      genreList.style.top = '';
+      genreList.style.bottom = '';
+      genreList.removeEventListener('transitionend', hideElem);
     }
 
-    gentrList.hiddem = false;
+    genreList.hidden = false;
 
-    const coords = gentrBtn.getBoundingClientRect();
-    if (document.documentElement.clientHeight - coords.bottom <= gentrList.offsetHeight && coords.top >= gentrList.offsetHeight) {
-      gentrList.style.bottom = '100%';
+    const coords = genreBtn.getBoundingClientRect();
+    if (
+      document.documentElement.clientHeight - coords.bottom <=
+        genreList.offsetHeight &&
+      coords.top >= genreList.offsetHeight
+    ) {
+      genreList.style.bottom = '100%';
     } else {
-      gentrList.style.top = '100%';
+      genreList.style.top = '100%';
     }
 
-    gentrList.classList.add('movie-collection__genre-list_active');
+    genreList.classList.add('movie-genre__filter-list_active');
   });
 }
 
-export function selectGenre() {
-}
+export function selectGenre() {}

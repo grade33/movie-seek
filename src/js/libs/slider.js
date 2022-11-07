@@ -1,9 +1,9 @@
 import { SingleSlider } from './SingleSlider.js';
 
 export class Slider {
-  constructor(selector, obj) {
+  constructor(selector, obj, elem = document) {
     this.sliders = [];
-    document.querySelectorAll(selector).forEach(slider => {
+    elem.querySelectorAll(selector).forEach(slider => {
       this.sliders.push(new SingleSlider(slider, obj));
     });
   }

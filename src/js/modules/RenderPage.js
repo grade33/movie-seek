@@ -15,7 +15,6 @@ export class RenderPage {
         'sectionNew',
         'sectionPopular',
         'sectionWatchedNow',
-        'sectionFilm',
         'sectionSerial',
         'sectionCartoon',
       ],

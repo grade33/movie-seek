@@ -12,7 +12,7 @@ html(lang="ru")
     #app 
       .background
 
-      .header 
+      header.header 
         .container.header__container 
           +logo('logo_active header__logo', '#')
           form.header__search(action="GET") 
@@ -81,7 +81,7 @@ html(lang="ru")
                     | Выберите жанр
                     svg
                       use(xlink:href="@img/sprite.svg#filter")
-                  ul.movie-genre__filter-list 
+                  ul.movie-genre__filter-list(hidden) 
                     li.movie-genre__filter-item 
                       button.movie-genre__filter-genre(type ="button") Вестерн
                     li.movie-genre__filter-item 
@@ -228,7 +228,7 @@ html(lang="ru")
                     button(type="button").movie-genre__pagination-btn 3
                     button(type="button").movie-genre__pagination-btn ...
                     button(type="button").movie-genre__pagination-btn 17
-            
+
             section.movie-collection(data-section="classic")
               .container.movie-collection__container 
                 h2.section-title(data-pattern="title")
@@ -240,62 +240,6 @@ html(lang="ru")
                     svg
                       use(xlink:href="@img/sprite.svg#chevron")
                   ul.slider__wrapper
-                    li.slider__slide.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
-                          span.rating 7.1
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.slider__slide.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
-                          span.rating 2.4
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.slider__slide.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
-                          span.rating 4.9
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.slider__slide.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
-                          span.rating 5
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.slider__slide.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
-                          span.rating 9.5
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.slider__slide.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
-                          span.rating 5.4
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.slider__slide.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
-                          span.rating 6.7
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
 
       footer.footer
         .container
