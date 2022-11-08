@@ -6,118 +6,109 @@ export class RenderSection {
     this.sectionName = this.sectionElem.dataset.sectionName;
 
     this.APIKey = '?api_key=c6f47a5e59ca4c3c897aaef4440a616c';
-    this.request = 'https://api.themoviedb.org/3';
-
+    this.beginningPathRequest = 'https://api.themoviedb.org/3';
+    this.beginningImgPathRequest = 'https://image.tmdb.org/t/p/w500';
     this.sections = {
       sectionNew: {
         title: 'Новинки',
         requestSearchType: '/discover/movie',
-        requestSearch:
-          '&language=ru&with_release_type=1&sort_by=release_date.desc&vote_count.gte=200&primary_release_date.gte=2022-01-01',
+        requestSearch: '&language=ru&primary_release_date.lte=2022-08-10&primary_release_date.gte=2022-02-10',
       },
       sectionPopular: {
         title: 'Популярное',
         requestSearchType: '/discover/movie',
-        requestSearch:
-          '&language=ru&with_release_type=1&sort_by=popularity.desc&primary_release_date.gte=2022-01-01',
-      },
-      sectionWatchedNow: {
-        title: 'Сейчас смотрят',
-        requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&with_release_type=1&sort_by=vote_count.desc&primary_release_date.gte=2022-01-01',
+        requestSearch: '&language=ru',
       },
       sectionSerial: {
         title: 'Сериалы',
         requestSearchType: '/discover/tv',
-        requestSearch: '&language=ru&with_release_type=1&air_date.gte=2022-01-01',
+        requestSearch: '&language=ru',
       },
       sectionCartoon: {
         title: 'Мультфильмы',
         requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&with_genres=16&sort_by=vote_count.desc&primary_release_date.gte=2022-01-01',
+        requestSearch: '&language=ru&with_genres=16&certification_country=US&certification=G',
       },
-      sectionGenresFilm: {
+      sectionListFilm: {
         title: 'По жанрам',
         requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&with_release_type=1&primary_release_date.gte=2022-01-01',
+        requestSearch: '&language=ru',
+        requestGenre: '/genre/movie/list',
       },
-      sectionGenresSerial: {
+      sectionListSerial: {
+        title: 'По жанрам',
+        requestSearchType: '/discover/tv',
+        requestSearch: '&language=ru',
+        requestGenre: '/genre/movie/list',
+      },
+      sectionListCartoon: {
         title: 'По жанрам',
         requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&with_release_type=1&primary_release_date.gte=2022-01-01',
-      },
-      sectionGenresCartoon: {
-        title: 'По жанрам',
-        requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&with_release_type=1&primary_release_date.gte=2022-01-01',
+        requestSearch: '&language=ru&language=ru&with_genres=16&certification_country=US&certification=G',
+        requestCertificationGenre: ''
       },
     };
 
-    this.setStaticContent();
-    this.setAsyncContent();
+    this.#setStaticContent();
+    this.#setAsyncContent();
   }
 
-  setStaticContent() {
-    if (this.sectionName.includes('Genre')) return;
-    const mainTitle = this.sectionElem.querySelector('[data-pattern="title"]');
-    mainTitle.textContent = this.sections[this.sectionName].title;
+  #setStaticContent() {
+    if (this.sectionName.includes('sectionList')) return;
+    const sectionTitleElem = this.sectionElem.querySelector('[data-pattern="title"]');
+    sectionTitleElem.textContent = this.sections[this.sectionName].title;
   }
 
-  async setAsyncContent() {
-    const searchType = this.sections[this.sectionName].requestSearchType;
-    const search = this.sections[this.sectionName].requestSearch;
-    const request = `${this.request}${searchType}${this.APIKey}${search}`;
+  async #setAsyncContent() {
+    const requestSearch = this.sections[this.sectionName].requestSearch;
+    const requestSearchType = this.sections[this.sectionName].requestSearchType;
+    const request = `${this.beginningPathRequest}${requestSearchType}${this.APIKey}${requestSearch}`;
 
     const response = await fetch(request);
     const data = await response.json();
-    // console.log(data);
+    console.log(this.sectionName, data);
 
-    this.appendFilmSlides(data.results);
+    if (this.sectionElem.dataset.sectionType === 'list') {
+      const filterElem = this.sectionElem.querySelector('[data-pattern="filter"]');
+      this.#addFilterContent(filterElem);
+    }
 
-    this.initSlider();
+    this.#appendMovieCards(data.results);
+
+    this.#initSlider();
   }
 
-  appendFilmSlides(filmsCollection) {
-    const sliderWrapper = this.sectionElem.querySelector('.slider__wrapper');
+  async #addFilterContent(filterElem) {
+    const requestGenre = this.sections[this.sectionName].requestGenre;
+    const request = `${this.beginningPathRequest}${requestGenre}${this.APIKey}&language=ru`;
 
-    for (const filmObj of filmsCollection) {
-      const li = this.createFilmSlide();
+    let genreList;
+    if(!this.sections[this.sectionName].requestGenre) {
+      genreList = this.sections[this.sectionName].requestCertificationGenre;
+    } else {
+      const response = await fetch(request);
+      genreList = await response.json();
+      genreList = genreList.genres;
+    }
 
-      const imgElem = li.querySelector('[data-film="img"]');
-      const ratingElem = li.querySelector('[data-film="rating"]');
-      const titleElem = li.querySelector('[data-film="title"]');
-      const dateElem = li.querySelector('[data-film="date"]');
-
-      const requestImg = 'https://image.tmdb.org/t/p/w500';
-
-      imgElem.src = requestImg + filmObj.poster_path;
-      imgElem.alt = filmObj.original_title;
-      ratingElem.textContent = filmObj.vote_average;
-      titleElem.textContent = filmObj.title || filmObj.name;
-      dateElem.textContent = filmObj.release_date || filmObj.first_air_date;
-
-      sliderWrapper.append(li);
+    for (const genre of genreList) {
+      const filterItemElem = this.#createFilterItemElem();
+      const filterGenreBtnElem = filterItemElem.querySelector('[data-pattern="filter-text"]');
+      filterGenreBtnElem.textContent = genre.name[0].toUpperCase() + genre.name.slice(1);
+      filterElem.append(filterItemElem);
     }
   }
 
-  createFilmSlide() {
-    let li = document.createElement('li');
-    li.className = 'slider__slide movie-card';
-    li.innerHTML = `
-    <a class="movie-card__link" href="#">
-      <div class="movie-card__poster-wrap"><img class="movie-card__poster" src="" alt="" data-film="img" />
-        <span class="rating" data-film="rating"></span>
-      </div>
-      <div class="movie-card__text-block">
-        <h3 class="movie-card__title" data-film="title"></h3>
-        <span class="movie-card__year-genre" data-film="date"></span>
-      </div>
-    </a>
-      `;
-    return li;
+  #createFilterItemElem() {
+    const filterItemELem = document.createElement('li');
+    filterItemELem.className = 'movie-list__filter-item';
+    filterItemELem.innerHTML = `
+<button class="movie-list__filter-genre" type="button" data-pattern="filter-text"></button>
+    `;
+    return filterItemELem;
   }
 
-  initSlider() {
+  #initSlider() {
     new Slider(
       '.movie-collection__slider',
       {
@@ -128,5 +119,62 @@ export class RenderSection {
       },
       this.sectionElem
     );
+  }
+
+  #appendMovieCards(filmsCollection) {
+    const movieCardListElem = this.sectionElem.querySelector('[data-movie="wrap"]');
+    const ratingElemCol = [];
+
+    for (const filmObj of filmsCollection) {
+      const movieCardElem = this.#createMovieCardElem(this.sectionElem.dataset.sectionType);
+
+      const imgElem = movieCardElem.querySelector('[data-movie="img"]');
+      const ratingElem = movieCardElem.querySelector('[data-movie="rating"]');
+      const titleElem = movieCardElem.querySelector('[data-movie="title"]');
+      const dateElem = movieCardElem.querySelector('[data-movie="date"]');
+
+      imgElem.src = this.beginningImgPathRequest + filmObj.poster_path;
+      imgElem.alt = filmObj.title;
+      ratingElem.textContent = filmObj.vote_average;
+      ratingElemCol.push(ratingElem);
+      titleElem.textContent = filmObj.title || filmObj.name;
+      dateElem.textContent = filmObj.release_date || filmObj.first_air_date;
+
+      movieCardListElem.append(movieCardElem);
+    }
+
+    this.#setColorRatingText(ratingElemCol);
+  }
+
+  #createMovieCardElem(sectionType) {
+    let movieCardElem;
+    if (sectionType === 'slider') {
+      movieCardElem = document.createElement('li');
+      movieCardElem.className = 'movie-card slider__slide';
+    } else if (sectionType === 'list') {
+      movieCardElem = document.createElement('div');
+      movieCardElem.className = 'movie-card';
+    } else throw new Error('Не указан тип шаблона Section при вызове функции');
+
+    movieCardElem.innerHTML = `
+    <a class="movie-card__link" href="#">
+      <div class="movie-card__poster-wrap"><img class="movie-card__poster" src="" alt="" data-movie="img" />
+        <span class="rating" data-movie="rating"></span>
+      </div>
+      <div class="movie-card__text-block">
+        <h3 class="movie-card__title" data-movie="title"></h3>
+        <span class="movie-card__year-genre" data-movie="date"></span>
+      </div>
+    </a>
+      `;
+    return movieCardElem;
+  }
+
+  #setColorRatingText(ratingElemCol) {
+    ratingElemCol.forEach((ratingElem) => {
+      if (+ratingElem.innerHTML === 0) ratingElem.remove();
+      else if (+ratingElem.innerHTML >= 7) ratingElem.style.background = '#007b00';
+      else if (+ratingElem.innerHTML < 5) ratingElem.style.background = '#ff0b0b';
+    });
   }
 }

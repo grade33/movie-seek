@@ -6,7 +6,7 @@
   z-index: 10;
   width: 100%;
   padding: 10px 0;
-  background: var(--blue);
+  background: $blue;
 
   &__container {
     display: flex;
@@ -21,7 +21,7 @@
 
     &:hover {
       .header__search-field {
-        border-color: var(--cyan-dark);
+        border-color: $cyan-dark;
       }
     }
 
@@ -53,35 +53,29 @@
 
     &-btn {
       padding: 10px 15px;
-      color: var(--cyan-dark);
-      color: var(--orange);
+      color: $cyan-dark;
       overflow: hidden;
-      color: var(--cyan-dark);
+      color: $cyan-dark;
       border-radius: 55px;
       transition: all 0.5s ease;
 
       &:hover {
-        background: var(--cyan-dark);
-        color: var(--black);
-        box-shadow: 0 0 5px var(--cyan-dark),
-          0 0 25px var(--cyan-dark),
-          0 0 50px var(--cyan-dark),
-          0 0 200px var(--cyan-dark);
+        background: $cyan-dark;
+        color: $black;
+        box-shadow: 0 0 5px $cyan-dark, 0 0 25px $cyan-dark, 0 0 50px $cyan-dark, 0 0 200px $cyan-dark;
       }
     }
 
     &-up {
-      color: var(--cyan);
+      color: $cyan;
       filter: hue-rotate(210deg);
     }
   }
 }
 
-.content {
-  &__container {
-    display: flex;
-    margin: 0 auto;
-  }
+.content-container {
+  display: flex;
+  margin: 0 auto;
 }
 
 .aside {
@@ -101,7 +95,7 @@
 
 .footer {
   padding: 20px 0;
-  background: var(--blue);
+  background: $blue;
 
   &__top {
     margin-bottom: 50px;
@@ -110,7 +104,7 @@
   &__title {
     font-size: 16px;
     font-weight: 700;
-    color: var(--gray);
+    color: $gray;
     margin-bottom: 16px;
   }
 
@@ -141,7 +135,6 @@
   }
 }
 
-
 // Sections
 
 .main-movie {
@@ -163,7 +156,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: linear-gradient(90deg, var(--black) 62%, hsla(0, 0%, 5%, .5), rgba(31, 31, 31, 0));
+    background-image: linear-gradient(90deg, $black, 62%, hsla(0, 0%, 5%, 0.5), rgba(31, 31, 31, 0));
   }
 
   &__info {
@@ -174,7 +167,7 @@
     width: 95%;
     height: 100%;
     padding: 40px;
-    background: var(--black);
+    background: $black;
   }
 
   &__title {
@@ -211,7 +204,7 @@
     }
 
     &-title {
-      color: var(--gray);
+      color: $gray;
     }
   }
 
@@ -243,13 +236,13 @@
       width: 45px;
       height: 45px;
       top: 130px;
-      color: var(--gray);
-      background: var(--white);
+      color: $gray;
+      background: $white;
       border-radius: 50%;
-      transition: color .3s ease-in-out;
+      transition: color 0.3s ease-in-out;
 
       &:hover {
-        color: var(--black);
+        color: $black;
       }
 
       &_prev {
@@ -272,7 +265,7 @@
   }
 }
 
-.movie-genre {
+.movie-list {
   margin-bottom: 40px;
 
   &__filter {
@@ -285,7 +278,7 @@
       padding: 5px 0;
       font-size: 16px;
       font-weight: 500;
-      color: var(--gray);
+      color: $gray;
       svg {
         width: 18px;
         height: 18px;
@@ -296,18 +289,19 @@
       left: 0;
       z-index: 7;
       display: flex;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: var(--blue-light);
+      background: $blue-light;
       border-radius: 17px;
       overflow: hidden;
       padding: 10px 10px;
       opacity: 0;
       visibility: hidden;
-      transition: opacity .3s ease-in-out,
-      visibility .3s ease-in-out;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
       &_active {
         opacity: 1;
         visibility: visible;
@@ -320,19 +314,19 @@
     &-genre {
       width: 100%;
       text-align: center;
-      padding: 15px 10px;
+      padding: 20px 25px;
       background: transparent;
-      transition: background-color .3s ease-in-out;
+      transition: background-color 0.3s ease-in-out;
       border-radius: 17px;
       &:hover {
-        background: var(--blue-dark);
+        background: $blue-dark;
       }
     }
   }
   &__list {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
     margin-bottom: 30px;
   }
   &__pagination {
@@ -348,7 +342,13 @@
       min-width: 40px;
       min-height: 30px;
       border-radius: 7px;
-      background: var(--cyan-dark);
+      background: $cyan-dark;
+      transition: background-color 0.3s ease-in-out;
+      &:hover,
+      &:focus-visible,
+      &:active {
+        background: darken($cyan-dark, 10%);
+      }
     }
   }
 }

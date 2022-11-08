@@ -5,7 +5,9 @@ html(lang="ru")
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title Document
+    title MovieSeek
+    link(rel="icon" href="./img/favicon.ico" type="image/x-icon")
+    link(rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon")
     link(rel="stylesheet" href="./style.min.css")
     script(defer src="./app.min.js")
   body
@@ -24,222 +26,50 @@ html(lang="ru")
             button.header__sign-btn.header__sign-in(type="button") Войти
             button.header__sign-btn.header__sign-up(type="button") Зарегистрироватся
 
-      .content
-        .container.content__container
-          aside.aside
-            .aside__container
-              nav.nav.aside__nav
-                button.nav__link(type="button" data-nav="pageMain") 
-                  svg.nav__icon
-                    use(xlink:href="@img/sprite.svg#home")
-                  span.nav__text Главная
-                button.nav__link(type="button" data-nav="pageFilm") 
-                  svg.nav__icon
-                    use(xlink:href="@img/sprite.svg#film")
-                  span.nav__text Фильмы
-                button.nav__link(type="button" data-nav="pageSerial") 
-                  svg.nav__icon
-                    use(xlink:href="@img/sprite.svg#serials")
-                  span.nav__text Сериалы
-                button.nav__link(type="button" data-nav="pageCartoon") 
-                  svg.nav__icon
-                    use(xlink:href="@img/sprite.svg#serials")
-                  span.nav__text Мультфильмы
-                button.nav__link(type="button") 
-                  svg.nav__icon
-                    use(xlink:href="@img/sprite.svg#actor")
-                  span.nav__text Актеры
+      h1.main__title.visually-hidden
+      .container.content-container
+        aside.aside
+          .aside__container
+            nav.nav.aside__nav
+              button.nav__link(type="button" data-nav="pageMain") 
+                svg.nav__icon
+                  use(xlink:href="@img/sprite.svg#home")
+                span.nav__text Главная
+              button.nav__link(type="button" data-nav="pageFilm") 
+                svg.nav__icon
+                  use(xlink:href="@img/sprite.svg#film")
+                span.nav__text Фильмы
+              button.nav__link(type="button" data-nav="pageSerial") 
+                svg.nav__icon
+                  use(xlink:href="@img/sprite.svg#serials")
+                span.nav__text Сериалы
+              button.nav__link(type="button" data-nav="pageCartoon") 
+                svg.nav__icon
+                  use(xlink:href="@img/sprite.svg#serials")
+                span.nav__text Мультфильмы
+              button.nav__link(type="button") 
+                svg.nav__icon
+                  use(xlink:href="@img/sprite.svg#actor")
+                span.nav__text Актеры
 
-          main.main 
-            h1.main__title.visually-hidden
-
-            section.main-movie
-              .container.main-movie__container 
-                .main-movie__content
-                  a.main-movie__link(href="#") 
-                  .main-movie__info
-                    h3.main-movie__title 
-                      a(href="#") Дом дракона
-                    p.main-movie__desc Таргариены ведут друг с другом ожесточенную борьбу за Железный трон. Самый долгожданный сериал года
-                    ul.main-movie__structure
-                      li.main-movie__structure-item
-                        span.main-movie__structure-title В главных ролях:&nbsp;
-                        span.main-movie__structure-text Юрий Колокольников, Семён Трескунов, Ксения Раппопорт
-                      li.main-movie__structure-item
-                        span.main-movie__structure-title Режиссер:&nbsp;
-                        span.main-movie__structure-text Александр Незлобин
-                  .main-movie__poster-wrap
-                    img.main-movie__poster(src="@img/movie-preview/preview-big-1.jpg" alt="Постер к главному фильму")
-
-            section.movie-genre(data-section="genre")
-              .container.movie-genre__container 
-                h2.section-title
-                  |Лучшие фильмы в жанре: 
-                  span Вестерн
-                .movie-genre__filter
-                  button.movie-genre__filter-btn(type="button") 
-                    | Выберите жанр
-                    svg
-                      use(xlink:href="@img/sprite.svg#filter")
-                  ul.movie-genre__filter-list(hidden) 
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Вестерн
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Биография
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Боевик
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Военный
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Детектив
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Драма
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Документальный
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") История
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Комедия
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Криминал
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Мелодрама
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Музыка
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Мультфильм
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Приключения
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Семейный
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Сериалы
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Спорт
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Триллер
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Ужасы
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Фэнтези
-                    li.movie-genre__filter-item 
-                      button.movie-genre__filter-genre(type ="button") Фантастика
-                .movie-genre__movies
-                  ul.movie-genre__list
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
-                          span.rating 7.1
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
-                          span.rating 2.4
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
-                          span.rating 4.9
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
-                          span.rating 5
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
-                          span.rating 9.5
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
-                          span.rating 5.4
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
-                          span.rating 6.7
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
-                          span.rating 7.1
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-2.jpg" alt="Постер к главному фильму")
-                          span.rating 2.4
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-3.jpg" alt="Постер к главному фильму")
-                          span.rating 4.9
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-4.jpg" alt="Постер к главному фильму")
-                          span.rating 5
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                    li.movie-card
-                      a.movie-card__link(href="#") 
-                        .movie-card__poster-wrap
-                          img.movie-card__poster(src="@img/movie-preview/preview-1.jpg" alt="Постер к главному фильму")
-                          span.rating 9.5
-                        .movie-card__text-block
-                          h3.movie-card__title Название какого-то фильма
-                          span.movie-card__year-genre 2022 Триллер
-                  .movie-genre__pagination
-                    button(type="button").movie-genre__pagination-btn 1
-                    button(type="button").movie-genre__pagination-btn 2
-                    button(type="button").movie-genre__pagination-btn 3
-                    button(type="button").movie-genre__pagination-btn ...
-                    button(type="button").movie-genre__pagination-btn 17
-
-            section.movie-collection(data-section="classic")
-              .container.movie-collection__container 
-                h2.section-title(data-pattern="title")
-                .slider.movie-collection__slider
-                  button.slider__btn.slider__btn_prev(type="button") 
-                    svg
-                      use(xlink:href="@img/sprite.svg#chevron")
-                  button.slider__btn.slider__btn_next(type="button") 
-                    svg
-                      use(xlink:href="@img/sprite.svg#chevron")
-                  ul.slider__wrapper
+        main.main 
+          section.main-movie
+            .container.main-movie__container 
+              .main-movie__content
+                a.main-movie__link(href="#") 
+                .main-movie__info
+                  h3.main-movie__title 
+                    a(href="#") Дом дракона
+                  p.main-movie__desc Таргариены ведут друг с другом ожесточенную борьбу за Железный трон. Самый долгожданный сериал года
+                  ul.main-movie__structure
+                    li.main-movie__structure-item
+                      span.main-movie__structure-title В главных ролях:&nbsp;
+                      span.main-movie__structure-text Юрий Колокольников, Семён Трескунов, Ксения Раппопорт
+                    li.main-movie__structure-item
+                      span.main-movie__structure-title Режиссер:&nbsp;
+                      span.main-movie__structure-text Александр Незлобин
+                .main-movie__poster-wrap
+                  img.main-movie__poster(src="@img/movie-preview/preview-big-1.jpg" alt="Постер к главному фильму")
 
       footer.footer
         .container
