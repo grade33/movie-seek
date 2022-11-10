@@ -20,7 +20,7 @@ input {
   border-radius: 37px;
   background: transparent;
   border: 2px solid $blue-light;
-  transition: border-color .3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
 
   &::placeholder {
     color: $gray;
@@ -75,6 +75,7 @@ input {
         width: 100%;
         background: $cyan;
       }
+
       .nav__icon {
         color: $cyan;
       }
@@ -84,7 +85,6 @@ input {
       .nav__text {
         color: $cyan;
       }
-
     }
   }
 
@@ -92,12 +92,12 @@ input {
     flex: none;
     width: 30px;
     height: 30px;
-    transition: color .3s ease-in-out;
+    transition: color 0.3s ease-in-out;
   }
 
   &__text {
     position: relative;
-    transition: color .3s ease-in-out;
+    transition: color 0.3s ease-in-out;
 
     &::after {
       content: '';
@@ -109,8 +109,7 @@ input {
       height: 3px;
       background: transparent;
       border-radius: 5px;
-      transition: background-color .3s ease-in-out,
-        width .3s ease-in-out;
+      transition: background-color 0.3s ease-in-out, width 0.3s ease-in-out;
     }
   }
 }
@@ -120,6 +119,9 @@ input {
   font-size: 36px;
   font-weight: 600;
   margin-bottom: 24px;
+  &_cyan {
+    color: $cyan;
+  }
 }
 
 .movie-card {
@@ -134,7 +136,7 @@ input {
 
     &:hover {
       .movie-card__poster-wrap::before {
-        background: rgba(0, 0, 0, .3);
+        background: rgba(0, 0, 0, 0.3);
       }
 
       .movie-card__title {
@@ -156,11 +158,12 @@ input {
         right: 0;
         bottom: 0;
         background: transparent;
-        transition: background-color .3s ease-in-out;
+        transition: background-color 0.3s ease-in-out;
         border-radius: 17px;
       }
     }
 
+    background: gray;
     width: 100%;
     height: 100%;
     border-radius: 17px;
@@ -176,7 +179,7 @@ input {
     font-size: 15px;
     font-weight: 500;
     margin-bottom: 4px;
-    transition: color .3s ease-in-out;
+    transition: color 0.3s ease-in-out;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -208,4 +211,46 @@ input {
   padding: 0 5px;
   border-radius: 5px;
   background: $gray-dark;
-} 
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    min-width: 40px;
+    min-height: 35px;
+    padding: 0 10px;
+    border-radius: 7px;
+    background: $cyan-dark;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+      background: darken($cyan-dark, 10%);
+    }
+
+    &_active {
+      background: darken($cyan-dark, 10%);
+    }
+    &_prev,
+    &_next {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    &_prev {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

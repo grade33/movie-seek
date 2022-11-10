@@ -26,11 +26,11 @@ html(lang="ru")
             button.header__sign-btn.header__sign-in(type="button") Войти
             button.header__sign-btn.header__sign-up(type="button") Зарегистрироватся
 
-      h1.main__title.visually-hidden
+      h1.main__title.js-main__title.visually-hidden
       .container.content-container
         aside.aside
           .aside__container
-            nav.nav.aside__nav
+            nav.nav.aside__nav.js-nav
               button.nav__link(type="button" data-nav="pageMain") 
                 svg.nav__icon
                   use(xlink:href="@img/sprite.svg#home")
@@ -43,16 +43,12 @@ html(lang="ru")
                 svg.nav__icon
                   use(xlink:href="@img/sprite.svg#serials")
                 span.nav__text Сериалы
-              button.nav__link(type="button" data-nav="pageCartoon") 
-                svg.nav__icon
-                  use(xlink:href="@img/sprite.svg#serials")
-                span.nav__text Мультфильмы
               button.nav__link(type="button") 
                 svg.nav__icon
                   use(xlink:href="@img/sprite.svg#actor")
                 span.nav__text Актеры
 
-        main.main 
+        main.main.js-main
           section.main-movie
             .container.main-movie__container 
               .main-movie__content

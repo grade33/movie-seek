@@ -1,116 +1,197 @@
 import { Slider } from '../libs/Slider.js';
+import { movieCard, paginationBtn, filterItem, genre } from '../libs/htmlPattern.js';
+import { sectionsData } from './sectionsData.js';
 
 export class RenderSection {
   constructor(section) {
-    this.sectionElem = section;
-    this.sectionName = this.sectionElem.dataset.sectionName;
+    // Selectors
+    this.cssSel = {
+      title: '.js-title',
+      pagination: '.js-pagination',
+      paginationBtn: '.js-pagination__btn',
+      paginationBtnPrev: '.js-pagination__prev',
+      paginationBtnNext: '.js-pagination__next',
+      filter: '.js-filter',
+      filterText: '.js-filter__text',
+      movie: '.js-movie',
+      movieImg: '.js-movie__img',
+      movieRating: '.js-movie__rating',
+      movieTitle: '.js-movie__title',
+      movieDate: '.js-movie__date',
+    };
 
+    // DOM Elems
+    this.sectionElem = section;
+    this.movieCardWrapElem = this.sectionElem.querySelector(this.cssSel.movie);
+    this.filterWrapElem = this.sectionElem.querySelector(this.cssSel.filter);
+    this.paginationWrapElem = this.sectionElem.querySelector(this.cssSel.pagination);
+
+    // Settings
+    this.sectionData = sectionsData[this.sectionElem.dataset.sectionName];
+    this.typeDiscover = this.sectionData.request.typeDiscover;
+
+    // API Paths
     this.APIKey = '?api_key=c6f47a5e59ca4c3c897aaef4440a616c';
     this.beginningPathRequest = 'https://api.themoviedb.org/3';
     this.beginningImgPathRequest = 'https://image.tmdb.org/t/p/w500';
-    this.sections = {
-      sectionNew: {
-        title: 'Новинки',
-        requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&primary_release_date.lte=2022-08-10&primary_release_date.gte=2022-02-10',
-      },
-      sectionPopular: {
-        title: 'Популярное',
-        requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru',
-      },
-      sectionSerial: {
-        title: 'Сериалы',
-        requestSearchType: '/discover/tv',
-        requestSearch: '&language=ru',
-      },
-      sectionCartoon: {
-        title: 'Мультфильмы',
-        requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&with_genres=16&certification_country=US&certification=G',
-      },
-      sectionListFilm: {
-        title: 'По жанрам',
-        requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru',
-        requestGenre: '/genre/movie/list',
-      },
-      sectionListSerial: {
-        title: 'По жанрам',
-        requestSearchType: '/discover/tv',
-        requestSearch: '&language=ru',
-        requestGenre: '/genre/movie/list',
-      },
-      sectionListCartoon: {
-        title: 'По жанрам',
-        requestSearchType: '/discover/movie',
-        requestSearch: '&language=ru&language=ru&with_genres=16&certification_country=US&certification=G',
-        requestCertificationGenre: ''
-      },
-    };
 
-    this.#setStaticContent();
-    this.#setAsyncContent();
+    // Function Call
+    this.#renderMovieCardAndPagination(this.typeDiscover).then(() => {
+      if (this.sectionData.type === 'list') this.#renderFilter();
+
+      this.#initSlider();
+      this.#setSliderSectionTitle();
+    });
   }
 
-  #setStaticContent() {
-    if (this.sectionName.includes('sectionList')) return;
-    const sectionTitleElem = this.sectionElem.querySelector('[data-pattern="title"]');
-    sectionTitleElem.textContent = this.sections[this.sectionName].title;
-  }
+  async #getRequestData(queryType) {
+    const settingDefault = this.sectionData.request.settingDefault;
+    const settingPage = `&page=${this.sectionData.request.page}`;
+    let settingGenre = this.sectionData.request.genre;
+    settingGenre = settingGenre ? `&with_genres=${settingGenre}` : '';
 
-  async #setAsyncContent() {
-    const requestSearch = this.sections[this.sectionName].requestSearch;
-    const requestSearchType = this.sections[this.sectionName].requestSearchType;
-    const request = `${this.beginningPathRequest}${requestSearchType}${this.APIKey}${requestSearch}`;
-
+    const request = `${this.beginningPathRequest}${queryType}${this.APIKey}${settingDefault}${settingGenre}${settingPage}`;
     const response = await fetch(request);
     const data = await response.json();
-    console.log(this.sectionName, data);
 
-    if (this.sectionElem.dataset.sectionType === 'list') {
-      const filterElem = this.sectionElem.querySelector('[data-pattern="filter"]');
-      this.#addFilterContent(filterElem);
-    }
+    // console.log(this.sectionData.name, data);
+    return data;
+  }
+  async #renderMovieCardAndPagination(queryType) {
+    const data = await this.#getRequestData(queryType);
+    this.#renderMovieCard(data.results);
 
-    this.#appendMovieCards(data.results);
-
-    this.#initSlider();
+    if (this.sectionData.type === 'list')
+      this.#renderPagination(data.page, data.total_pages);
   }
 
-  async #addFilterContent(filterElem) {
-    const requestGenre = this.sections[this.sectionName].requestGenre;
-    const request = `${this.beginningPathRequest}${requestGenre}${this.APIKey}&language=ru`;
+  #renderMovieCard(filmList) {
+    this.movieCardWrapElem.innerHTML = null;
 
-    let genreList;
-    if(!this.sections[this.sectionName].requestGenre) {
-      genreList = this.sections[this.sectionName].requestCertificationGenre;
-    } else {
-      const response = await fetch(request);
-      genreList = await response.json();
-      genreList = genreList.genres;
+    for (const movie of filmList) {
+      let movieCardElem;
+
+      movieCardElem = movieCard(this.sectionData.type === 'slider');
+
+      const imgElem = movieCardElem.querySelector(this.cssSel.movieImg);
+      const ratingElem = movieCardElem.querySelector(this.cssSel.movieRating);
+      const titleElem = movieCardElem.querySelector(this.cssSel.movieTitle);
+      const dateElem = movieCardElem.querySelector(this.cssSel.movieDate);
+
+      imgElem.src = this.beginningImgPathRequest + movie.poster_path;
+      imgElem.alt = movie.title;
+      ratingElem.textContent = movie.vote_average;
+      setRatingColor(ratingElem);
+      titleElem.textContent = movie.title || movie.name;
+      dateElem.textContent = movie.release_date || movie.first_air_date;
+
+      this.movieCardWrapElem.append(movieCardElem);
     }
 
-    for (const genre of genreList) {
-      const filterItemElem = this.#createFilterItemElem();
-      const filterGenreBtnElem = filterItemElem.querySelector('[data-pattern="filter-text"]');
+    function setRatingColor(ratingElem) {
+      if (+ratingElem.innerHTML === 0) ratingElem.remove();
+      else if (+ratingElem.innerHTML >= 7) ratingElem.style.background = '#007b00';
+      else if (+ratingElem.innerHTML < 5) ratingElem.style.background = '#ff0b0b';
+    }
+  }
+
+  #renderPagination(page, totalPages) {
+    this.paginationWrapElem.innerHTML = null;
+    this.sectionData.request.page = 1;
+
+    let startPage = +page - 2;
+    let endPage = +page + 2;
+
+    if (startPage < 1) {
+      startPage = 1;
+      endPage = +page + 2;
+    }
+    if (endPage > totalPages) {
+      startPage = page - 2;
+      endPage = totalPages;
+    }
+
+    if (startPage !== 1) {
+      this.paginationWrapElem.append(paginationBtn(1, page));
+      this.paginationWrapElem.append(paginationBtn('...'));
+    }
+    for (let i = startPage; i <= endPage; i++) {
+      this.paginationWrapElem.append(paginationBtn(i, page));
+    }
+    if (endPage !== totalPages) {
+      this.paginationWrapElem.append(paginationBtn('...'));
+      this.paginationWrapElem.append(paginationBtn(totalPages, page));
+    }
+
+    const prevBtn = paginationBtn('prev');
+    const nextBtn = paginationBtn('next');
+    this.paginationWrapElem.prepend(prevBtn);
+    this.paginationWrapElem.append(nextBtn);
+
+    this.#setHandlerPagination(totalPages);
+  }
+  #setHandlerPagination(totalPages) {
+    const prevBtn = this.sectionElem.querySelector(this.cssSel.paginationBtnPrev);
+    const nextBtn = this.sectionElem.querySelector(this.cssSel.paginationBtnNext);
+    prevBtn.addEventListener('click', () => {
+      if (this.sectionData.request.page - 1 >= 1) {
+        --this.sectionData.request.page;
+        getNewPage.call(this);
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      if (this.sectionData.request.page + 1 <= totalPages) {
+        ++this.sectionData.request.page;
+        getNewPage.call(this);
+      }
+    });
+
+    this.paginationWrapElem
+      .querySelectorAll(this.cssSel.paginationBtn)
+      .forEach((paginationBtnElem) => {
+        paginationBtnElem.addEventListener('click', () => {
+          this.sectionData.request.page = paginationBtnElem.dataset.paginationBtn;
+          getNewPage.call(this);
+        });
+      });
+
+    async function getNewPage() {
+      this.#renderMovieCardAndPagination(this.typeDiscover);
+    }
+  }
+
+  async #renderFilter() {
+    const queryType = this.sectionData.request.typeGenre;
+    const genreData = await this.#getRequestData(queryType);
+    for (const genre of genreData.genres) {
+      const filterItemElem = filterItem();
+      const filterGenreBtnElem = filterItemElem.querySelector(this.cssSel.filterText);
+      filterGenreBtnElem.dataset.genreId = genre.id;
       filterGenreBtnElem.textContent = genre.name[0].toUpperCase() + genre.name.slice(1);
-      filterElem.append(filterItemElem);
+      this.filterWrapElem.append(filterItemElem);
     }
-  }
 
-  #createFilterItemElem() {
-    const filterItemELem = document.createElement('li');
-    filterItemELem.className = 'movie-list__filter-item';
-    filterItemELem.innerHTML = `
-<button class="movie-list__filter-genre" type="button" data-pattern="filter-text"></button>
-    `;
-    return filterItemELem;
+    this.#setHandlerFilter();
+  }
+  #setHandlerFilter() {
+    this.filterWrapElem
+      .querySelectorAll(this.cssSel.filterText)
+      .forEach((filterGenreBtnElem) => {
+        filterGenreBtnElem.addEventListener('click', (e) => {
+          const sectionTitle = this.sectionElem.querySelector(this.cssSel.title);
+          sectionTitle.innerHTML = `${this.sectionData.title} в жанре ${genre(
+            e.currentTarget.textContent
+          )}`;
+
+          this.sectionData.request.genre = e.currentTarget.dataset.genreId;
+          this.#renderMovieCardAndPagination(this.typeDiscover);
+        });
+      });
   }
 
   #initSlider() {
     new Slider(
-      '.movie-collection__slider',
+      '.slider',
       {
         gap: '20',
         slidePerView: 6,
@@ -120,61 +201,8 @@ export class RenderSection {
       this.sectionElem
     );
   }
-
-  #appendMovieCards(filmsCollection) {
-    const movieCardListElem = this.sectionElem.querySelector('[data-movie="wrap"]');
-    const ratingElemCol = [];
-
-    for (const filmObj of filmsCollection) {
-      const movieCardElem = this.#createMovieCardElem(this.sectionElem.dataset.sectionType);
-
-      const imgElem = movieCardElem.querySelector('[data-movie="img"]');
-      const ratingElem = movieCardElem.querySelector('[data-movie="rating"]');
-      const titleElem = movieCardElem.querySelector('[data-movie="title"]');
-      const dateElem = movieCardElem.querySelector('[data-movie="date"]');
-
-      imgElem.src = this.beginningImgPathRequest + filmObj.poster_path;
-      imgElem.alt = filmObj.title;
-      ratingElem.textContent = filmObj.vote_average;
-      ratingElemCol.push(ratingElem);
-      titleElem.textContent = filmObj.title || filmObj.name;
-      dateElem.textContent = filmObj.release_date || filmObj.first_air_date;
-
-      movieCardListElem.append(movieCardElem);
-    }
-
-    this.#setColorRatingText(ratingElemCol);
-  }
-
-  #createMovieCardElem(sectionType) {
-    let movieCardElem;
-    if (sectionType === 'slider') {
-      movieCardElem = document.createElement('li');
-      movieCardElem.className = 'movie-card slider__slide';
-    } else if (sectionType === 'list') {
-      movieCardElem = document.createElement('div');
-      movieCardElem.className = 'movie-card';
-    } else throw new Error('Не указан тип шаблона Section при вызове функции');
-
-    movieCardElem.innerHTML = `
-    <a class="movie-card__link" href="#">
-      <div class="movie-card__poster-wrap"><img class="movie-card__poster" src="" alt="" data-movie="img" />
-        <span class="rating" data-movie="rating"></span>
-      </div>
-      <div class="movie-card__text-block">
-        <h3 class="movie-card__title" data-movie="title"></h3>
-        <span class="movie-card__year-genre" data-movie="date"></span>
-      </div>
-    </a>
-      `;
-    return movieCardElem;
-  }
-
-  #setColorRatingText(ratingElemCol) {
-    ratingElemCol.forEach((ratingElem) => {
-      if (+ratingElem.innerHTML === 0) ratingElem.remove();
-      else if (+ratingElem.innerHTML >= 7) ratingElem.style.background = '#007b00';
-      else if (+ratingElem.innerHTML < 5) ratingElem.style.background = '#ff0b0b';
-    });
+  #setSliderSectionTitle() {
+    const sectionTitleElem = this.sectionElem.querySelector(this.cssSel.title);
+    sectionTitleElem.textContent = this.sectionData.title;
   }
 }

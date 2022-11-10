@@ -10,6 +10,7 @@ export class SingleSlider {
   }) {
 
     this.slider = slider;
+
     this.mainSelector = mainSelector;
     this.slidePerView = slidePerView;
     this.slidePerGroup = slidePerGroup;

@@ -1,7 +1,7 @@
 import { RenderPage } from './modules/RenderPage.js';
-import * as functions from './modules/main.js';
+import { setPaddingStantHeader, openCloseGenreFilter } from './modules/helpFunctions.js';
 
-functions.setPaddingStantHeader();
-functions.openCloseGenreFilter();
+setPaddingStantHeader();
+openCloseGenreFilter();
 
 new RenderPage();
