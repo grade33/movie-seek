@@ -26,20 +26,20 @@ html(lang="ru")
             button.header__sign-btn.header__sign-in(type="button") Войти
             button.header__sign-btn.header__sign-up(type="button") Зарегистрироватся
 
-      h1.main__title.js-main__title.visually-hidden
+      h1.main__title.js-page-title.visually-hidden
       .container.content-container
         aside.aside
           .aside__container
             nav.nav.aside__nav.js-nav
-              button.nav__link(type="button" data-nav="pageMain") 
+              button.nav__link.js-nav__link(type="button" data-page-type="pageMain") 
                 svg.nav__icon
                   use(xlink:href="@img/sprite.svg#home")
                 span.nav__text Главная
-              button.nav__link(type="button" data-nav="pageFilm") 
+              button.nav__link.js-nav__link(type="button" data-page-type="pageFilm") 
                 svg.nav__icon
                   use(xlink:href="@img/sprite.svg#film")
                 span.nav__text Фильмы
-              button.nav__link(type="button" data-nav="pageSerial") 
+              button.nav__link.js-nav__link(type="button" data-page-type="pageSerial") 
                 svg.nav__icon
                   use(xlink:href="@img/sprite.svg#serials")
                 span.nav__text Сериалы
@@ -49,23 +49,24 @@ html(lang="ru")
                 span.nav__text Актеры
 
         main.main.js-main
-          section.main-movie
-            .container.main-movie__container 
-              .main-movie__content
-                a.main-movie__link(href="#") 
-                .main-movie__info
-                  h3.main-movie__title 
-                    a(href="#") Дом дракона
-                  p.main-movie__desc Таргариены ведут друг с другом ожесточенную борьбу за Железный трон. Самый долгожданный сериал года
-                  ul.main-movie__structure
-                    li.main-movie__structure-item
-                      span.main-movie__structure-title В главных ролях:&nbsp;
-                      span.main-movie__structure-text Юрий Колокольников, Семён Трескунов, Ксения Раппопорт
-                    li.main-movie__structure-item
-                      span.main-movie__structure-title Режиссер:&nbsp;
-                      span.main-movie__structure-text Александр Незлобин
-                .main-movie__poster-wrap
-                  img.main-movie__poster(src="@img/movie-preview/preview-big-1.jpg" alt="Постер к главному фильму")
+          section.promo.js-promo
+            .container.promo__container 
+              .promo__content
+                span.js-promo__rating.promo__rating.rating
+                a.promo__link(href="#") 
+                .promo__info
+                  h3.promo__title 
+                    button.js-promo__title(type="button")
+                  p.js-promo__overview.promo__overview
+                  ul.promo__structure
+                    li.promo__structure-item
+                      span.promo__structure-title В главных ролях:&nbsp;
+                      span.js-promo__staring.promo__structure-text
+                    li.promo__structure-item
+                      span.promo__structure-title Режиссер:&nbsp;
+                      span.js-promo__director.promo__structure-text
+                .promo__poster-wrap
+                  img.js-promo__poster.promo__poster(src="" alt="")
 
       footer.footer
         .container
@@ -98,6 +99,79 @@ html(lang="ru")
               .footer__info
                 a.footer__info-link(href='#') Terms of use
                 a.footer__info-link(href='#') Privacy policy
+
+    //- .overlay 
+      .popup.movie
+        .container.movie__container
+          .movie__poster-wrap 
+            img.movie__poster(src="@img/movie-preview/house-of-dragon.jpg", alt="")
+          .movie__info
+            .movie__main
+              .movie__title-release
+                h2.movie__title Дом дракона
+                span.movie__release (сериал 2022 - ...)
+              .movie__title-original-certification
+                span.movie__title-original House of the Dragon
+                span.movie__certification 18+
+            .movie__about 
+              h2.movie__about-title О фильме
+              ul.movie__about-list
+                li.movie__about-item 
+                  span.movie__about-heading Год производства
+                  span.movie__about-text 2022 (1 сезон)
+                li.movie__about-item 
+                  span.movie__about-heading Платформа
+                  span.movie__about-text HBO
+                li.movie__about-item 
+                  span.movie__about-heading Страна
+                  span.movie__about-text США
+                li.movie__about-item 
+                  span.movie__about-heading Жанр
+                  span.movie__about-text фэнтези, боевик, драма, мелодрама
+                li.movie__about-item 
+                  span.movie__about-heading Слоган
+                  span.movie__about-text «Fire Will Reign»
+                li.movie__about-item 
+                  span.movie__about-heading Режиссер
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Сценарий
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Продюсер
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Оператор
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Композитор
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Художник
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Монтаж
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Премьера в мире
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Цифровой релиз
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Возраст
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                li.movie__about-item 
+                  span.movie__about-heading Время
+                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+
+            
+
+
+
+            
+          
+       
 
 
 

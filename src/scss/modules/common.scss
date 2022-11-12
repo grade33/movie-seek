@@ -1,5 +1,5 @@
 body {
-  font-family: 'Graphik', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 14px;
   color: $white;
@@ -119,6 +119,7 @@ input {
   font-size: 36px;
   font-weight: 600;
   margin-bottom: 24px;
+
   &_cyan {
     color: $cyan;
   }
@@ -130,7 +131,7 @@ input {
     flex-direction: column;
     height: 100%;
     position: relative;
-    z-index: 3;
+    z-index: 4;
     width: 100%;
     border-radius: 17px;
 
@@ -199,6 +200,7 @@ input {
 
 .rating {
   position: absolute;
+  z-index: 2;
   top: 5px;
   left: 5px;
   display: flex;
@@ -211,6 +213,8 @@ input {
   padding: 0 5px;
   border-radius: 5px;
   background: $gray-dark;
+  user-select: none;
+  cursor: unset;
 }
 
 .pagination {
@@ -240,6 +244,7 @@ input {
     &_active {
       background: darken($cyan-dark, 10%);
     }
+
     &_prev,
     &_next {
       svg {
@@ -247,10 +252,122 @@ input {
         height: 20px;
       }
     }
+
     &_prev {
       svg {
         transform: rotate(180deg);
       }
     }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background: rgba($black, .5);
+  backdrop-filter: blur(10px);
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  padding: 15px 0;
+  width: 50%;
+  height: 50%;
+  color: $black;
+  background: $white;
+  border-radius: 15px;
+  &>* {
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+.movie {
+  height: 90%;
+  width: 90%;
+
+  &__container {
+    display: flex;
+    gap: 50px;
+  }
+
+  &__poster {
+    &-wrap {}
+    border-radius: 5px;
+  }
+
+  &__info {}
+
+  &__main {
+    margin-bottom: 50px;
+  }
+
+  &__title-release {
+    line-height: 1; 
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  &__title {}
+
+  &__release {
+    font-size: 40px;
+  }
+
+  &__title-original-certification {
+    color: $black-06;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__title-original {
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  &__certification {
+    font-size: 12px;
+    padding: 2px 5px;
+    line-height: 1;
+    border-radius: 5px;
+    border: 1px solid $black-06;
+  }
+
+  &__about {
+    &-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &-heading {
+      width: 160px;
+      color: $black-06;
+    }
+
+    &-text {}
   }
 }

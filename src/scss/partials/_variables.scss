@@ -6,9 +6,10 @@ $sm: 575.98px;
 
 $white: #f9f9f9;
 $black: #0c0c0c;
+$black-06: rgba(0, 0, 0, .6);
 $gray: #afafaf;
 $gray-dark: #808080;
-$cyan: #02D3DE;      
+$cyan: #02D3DE;
 $cyan-dark: #029AA2;
 $blue: #233c4a;
 $blue-dark: #202f38;
@@ -19,6 +20,7 @@ body {
   color: #0c0c0c;
   color: #050801;
 }
+
 :root {
   --container: 1440px;
   --gap: 16px;

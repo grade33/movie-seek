@@ -1,3 +1,14 @@
+import { cssSelData, apiData } from './data.js';
+
+export function delegate(box, eventName, selector, handler) {
+  box.addEventListener(eventName, (e) => {
+    const elem = e.target.closest(selector);
+    if (!elem) return;
+
+    handler.call(elem, e);
+  });
+}
+
 export function setPaddingStantHeader() {
   const content = document.querySelector('.content-container');
   const header = document.querySelector('.header');
@@ -8,13 +19,13 @@ export function setPaddingStantHeader() {
 
 export function openCloseGenreFilter() {
   document.addEventListener('click', (e) => {
-    const genreListActive = document.querySelector('.movie-list__filter-list_active');
-    const genre = e.target.closest('.movie-list__filter');
-    const genreBtn = e.target.closest('.js-filter__btn');
-    const genreText = e.target.closest('.js-filter__text');
-    
-    if((genreListActive && !genre) || (genreListActive && genreBtn || genreText)) {
-      genreListActive.classList.remove('movie-list__filter-list_active');
+    const genreListActive = document.querySelector('.catalog__filter-list_active');
+    const genre = e.target.closest('.catalog__filter');
+    const genreBtn = e.target.closest(cssSelData.genreBtnOpen);
+    const genreText = e.target.closest(cssSelData.genreBtn);
+
+    if ((genreListActive && !genre) || (genreListActive && genreBtn) || genreText) {
+      genreListActive.classList.remove('catalog__filter-list_active');
       genreListActive.addEventListener('transitionend', hideElem);
       return;
     }
@@ -24,29 +35,29 @@ export function openCloseGenreFilter() {
       genreListActive.style.bottom = '';
       genreListActive.removeEventListener('transitionend', hideElem);
     }
-    
 
-    if(!genreBtn) return;
+    if (!genreBtn) return;
 
-    const genreList = genre.querySelector('.movie-list__filter-list');
+    const genreList = genre.querySelector('.catalog__filter-list');
     genreList.hidden = false;
+    genreList.style.top = '100%';
 
-    const coords = genreBtn.getBoundingClientRect();
-    if (document.documentElement.clientHeight - coords.bottom <= genreList.offsetHeight && coords.top >= genreList.offsetHeight) {
-      genreList.style.bottom = '100%';
-    } else {
-      genreList.style.top = '100%';
-    }
-
-    genreList.classList.add('movie-list__filter-list_active');
+    genreList.classList.add('catalog__filter-list_active');
   });
 }
 
-export function delegate(box, eventName, selector, handler) {
-  box.addEventListener(eventName, (e) => {
-    const elem = e.target.closest(selector);
-    if (!elem) return;
+export async function getRequestData({
+  queryType,
+  querySetting = '',
+  genreId = false,
+  page = 1,
+}) {
+  const settingPage = `&page=${page}`;
+  let settingGenre = genreId ? `&with_genres=${genreId}` : '';
 
-    handler.call(elem, e);
-  });
+  const request = `${apiData.baseURL}${queryType}${apiData.APIKey}${querySetting}${settingGenre}${settingPage}`;
+  const response = await fetch(request);
+  const data = await response.json();
+
+  return data;
 }
