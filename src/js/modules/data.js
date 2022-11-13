@@ -1,4 +1,5 @@
 export const cssSelData = {
+  promo: '.js-promo',
   navLink: '.js-nav__link',
   pageTitle: '.js-page-title',
   nav: '.js-nav',

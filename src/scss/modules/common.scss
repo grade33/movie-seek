@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Geometria';
   font-weight: 400;
   font-size: 14px;
   color: $white;
@@ -279,95 +279,14 @@ input {
   bottom: 0;
   right: 0;
   margin: auto;
-  padding: 15px 0;
   width: 50%;
   height: 50%;
   color: $black;
   background: $white;
   border-radius: 15px;
+  padding: 15px 0;
   &>* {
-    height: 100%;
-    overflow: auto;
-  }
-}
-
-.movie {
-  height: 90%;
-  width: 90%;
-
-  &__container {
-    display: flex;
-    gap: 50px;
-  }
-
-  &__poster {
-    &-wrap {}
-    border-radius: 5px;
-  }
-
-  &__info {}
-
-  &__main {
-    margin-bottom: 50px;
-  }
-
-  &__title-release {
-    line-height: 1; 
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 15px;
-  }
-
-  &__title {}
-
-  &__release {
-    font-size: 40px;
-  }
-
-  &__title-original-certification {
-    color: $black-06;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  &__title-original {
-    font-size: 18px;
-    font-weight: 300;
-  }
-
-  &__certification {
-    font-size: 12px;
-    padding: 2px 5px;
-    line-height: 1;
-    border-radius: 5px;
-    border: 1px solid $black-06;
-  }
-
-  &__about {
-    &-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 30px;
-    }
-
-    &-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    &-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    &-heading {
-      width: 160px;
-      color: $black-06;
-    }
-
-    &-text {}
+    max-height: 100%;
+    overflow-y: scroll;
   }
 }

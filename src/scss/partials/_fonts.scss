@@ -1,54 +1,114 @@
 @font-face {
-	 font-family: Graphik;
+	 font-family: Geometria;
 	 font-display: swap;
-	 src: url("fonts/Graphik-Black.woff2") format("woff2"), url("fonts/Graphik-Black.woff") format("woff");
-	 font-weight: 900;
-	 font-style: normal;
- }
-@font-face {
-	 font-family: Graphik;
-	 font-display: swap;
-	 src: url("fonts/Graphik-Bold.woff2") format("woff2"), url("fonts/Graphik-Bold.woff") format("woff");
+	 src: url("fonts/Geometria-Bold.woff2") format("woff2"), url("fonts/Geometria-Bold.woff") format("woff");
 	 font-weight: 700;
 	 font-style: normal;
  }
 @font-face {
-	 font-family: Graphik;
+	 font-family: Geometria;
 	 font-display: swap;
-	 src: url("fonts/Graphik-Extralight.woff2") format("woff2"), url("fonts/Graphik-Extralight.woff") format("woff");
+	 src: url("fonts/Geometria-BoldItalic.woff2") format("woff2"), url("fonts/Geometria-BoldItalic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-ExtraBold.woff2") format("woff2"), url("fonts/Geometria-ExtraBold.woff") format("woff");
+	 font-weight: 800;
+	 font-style: normal;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-ExtraBoldItalic.woff2") format("woff2"), url("fonts/Geometria-ExtraBoldItalic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-Heavy.woff2") format("woff2"), url("fonts/Geometria-Heavy.woff") format("woff");
+	 font-weight: 800;
+	 font-style: normal;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-HeavyItalic.woff2") format("woff2"), url("fonts/Geometria-HeavyItalic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-ExtraLight.woff2") format("woff2"), url("fonts/Geometria-ExtraLight.woff") format("woff");
 	 font-weight: 200;
 	 font-style: normal;
  }
 @font-face {
-	 font-family: Graphik;
+	 font-family: Geometria;
 	 font-display: swap;
-	 src: url("fonts/Graphik-Light.woff2") format("woff2"), url("fonts/Graphik-Light.woff") format("woff");
+	 src: url("fonts/Geometria-Light.woff2") format("woff2"), url("fonts/Geometria-Light.woff") format("woff");
 	 font-weight: 300;
 	 font-style: normal;
  }
 @font-face {
-	 font-family: Graphik;
+	 font-family: Geometria;
 	 font-display: swap;
-	 src: url("fonts/Graphik-Semibold.woff2") format("woff2"), url("fonts/Graphik-Semibold.woff") format("woff");
-	 font-weight: 600;
+	 src: url("fonts/Geometria-LightItalic.woff2") format("woff2"), url("fonts/Geometria-LightItalic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-Medium.woff2") format("woff2"), url("fonts/Geometria-Medium.woff") format("woff");
+	 font-weight: 500;
 	 font-style: normal;
  }
 @font-face {
-	 font-family: Graphik;
+	 font-family: Geometria;
 	 font-display: swap;
-	 src: url("fonts/Graphik-Thin.woff2") format("woff2"), url("fonts/Graphik-Thin.woff") format("woff");
+	 src: url("fonts/Geometria-MediumItalic.woff2") format("woff2"), url("fonts/Geometria-MediumItalic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-Thin.woff2") format("woff2"), url("fonts/Geometria-Thin.woff") format("woff");
 	 font-weight: 100;
 	 font-style: normal;
  }
-
-
- 
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-ThinItalic.woff2") format("woff2"), url("fonts/Geometria-ThinItalic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
+ }
 @font-face {
 	 font-family: Montserrat;
 	 font-display: swap;
 	 src: url("fonts/Montserrat-Black.woff2") format("woff2"), url("fonts/Montserrat-Black.woff") format("woff");
 	 font-weight: 900;
 	 font-style: normal;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-ExtraLightItalic.woff2") format("woff2"), url("fonts/Geometria-ExtraLightItalic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
+ }
+@font-face {
+	 font-family: Geometria;
+	 font-display: swap;
+	 src: url("fonts/Geometria-Italic.woff2") format("woff2"), url("fonts/Geometria-Italic.woff") format("woff");
+	 font-weight: 400;
+	 font-style: italic;
  }
 @font-face {
 	 font-family: Montserrat;
@@ -97,20 +157,6 @@
 	 font-display: swap;
 	 src: url("fonts/Montserrat-SemiBold.woff2") format("woff2"), url("fonts/Montserrat-SemiBold.woff") format("woff");
 	 font-weight: 600;
-	 font-style: normal;
- }
-@font-face {
-	 font-family: Graphik;
-	 font-display: swap;
-	 src: url("fonts/Graphik-Medium.woff2") format("woff2"), url("fonts/Graphik-Medium.woff") format("woff");
-	 font-weight: 500;
-	 font-style: normal;
- }
-@font-face {
-	 font-family: Graphik;
-	 font-display: swap;
-	 src: url("fonts/Graphik-Regular.woff2") format("woff2"), url("fonts/Graphik-Regular.woff") format("woff");
-	 font-weight: 400;
 	 font-style: normal;
  }
 @font-face {

@@ -100,70 +100,72 @@ html(lang="ru")
                 a.footer__info-link(href='#') Terms of use
                 a.footer__info-link(href='#') Privacy policy
 
-    //- .overlay 
-      .popup.movie
+    .overlay 
+      .popup.movie.js-movie
         .container.movie__container
-          .movie__poster-wrap 
-            img.movie__poster(src="@img/movie-preview/house-of-dragon.jpg", alt="")
-          .movie__info
-            .movie__main
-              .movie__title-release
-                h2.movie__title Дом дракона
-                span.movie__release (сериал 2022 - ...)
-              .movie__title-original-certification
-                span.movie__title-original House of the Dragon
-                span.movie__certification 18+
-            .movie__about 
-              h2.movie__about-title О фильме
-              ul.movie__about-list
-                li.movie__about-item 
-                  span.movie__about-heading Год производства
-                  span.movie__about-text 2022 (1 сезон)
-                li.movie__about-item 
-                  span.movie__about-heading Платформа
-                  span.movie__about-text HBO
-                li.movie__about-item 
-                  span.movie__about-heading Страна
-                  span.movie__about-text США
-                li.movie__about-item 
-                  span.movie__about-heading Жанр
-                  span.movie__about-text фэнтези, боевик, драма, мелодрама
-                li.movie__about-item 
-                  span.movie__about-heading Слоган
-                  span.movie__about-text «Fire Will Reign»
-                li.movie__about-item 
-                  span.movie__about-heading Режиссер
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Сценарий
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Продюсер
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Оператор
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Композитор
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Художник
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Монтаж
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Премьера в мире
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Цифровой релиз
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Возраст
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                li.movie__about-item 
-                  span.movie__about-heading Время
-                  span.movie__about-text Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+          .movie__content
+            .movie__poster-wrap 
+              img.movie__poster.js-movie__poster(src="", alt="")
+            .movie__info
+              .movie__main
+                .movie__title-release
+                  h2.movie__title.js-movie__title Название
+                  span.movie__release.js-movie__release Релиз
+                .movie__title-original-certification
+                  span.movie__title-original.js-movie__title-original Name
+                  span.movie__certification.js-movie__certification-title ?+
+                p.movie__overview.js-movie__overview overview
+              .movie__about 
+                h2.movie__about-title О фильме
+                ul.movie__about-list
+                  li.movie__about-item 
+                    span.movie__about-heading Год производства
+                    span.movie__about-text.js-movie__release-year Год релиза
+                  li.movie__about-item 
+                    span.movie__about-heading Страна
+                    span.movie__about-text.js-movie__country Страна
+                  li.movie__about-item 
+                    span.movie__about-heading Жанр
+                    span.movie__about-text.js-movie__genre жанр
+                  li.movie__about-item 
+                    span.movie__about-heading Слоган
+                    span.movie__about-text.js-movie__slogan слоган
+                  li.movie__about-item 
+                    span.movie__about-heading Режиссер
+                    span.movie__about-text.js-movie__directing режисёр
+                  li.movie__about-item 
+                    span.movie__about-heading Сценарий
+                    span.movie__about-text.js-movie__writing Райан Кондал, Джордж Р.Р. Мартин, Чармэйн Де Грейт
+                  li.movie__about-item 
+                    span.movie__about-heading Продюсер
+                    span.movie__about-text.js-movie__production продюсер
+                  li.movie__about-item 
+                    span.movie__about-heading Оператор
+                    span.movie__about-text.js-movie__camera оператор
+                  li.movie__about-item 
+                    span.movie__about-heading Композитор
+                    span.movie__about-text.js-movie__sound композитр
+                  li.movie__about-item 
+                    span.movie__about-heading Художник
+                    span.movie__about-text.js-movie__art Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
+                  li.movie__about-item 
+                    span.movie__about-heading Монтаж
+                    span.movie__about-text.js-movie__editing
+                  li.movie__about-item 
+                    span.movie__about-heading Бюджет
+                    span.movie__about-text.js-movie__budget
+                  li.movie__about-item 
+                    span.movie__about-heading Сборы
+                    span.movie__about-text.js-movie__revenue
+                  li.movie__about-item 
+                    span.movie__about-heading Премьера в мире
+                    span.movie__about-text.js-movie__premiere
+                  li.movie__about-item 
+                    span.movie__about-heading Рейтинг MPAA
+                    span.movie__about-text.movie__about-text_age.js-movie__certification ?+
+                  li.movie__about-item 
+                    span.movie__about-heading Время
+                    span.movie__about-text.js-movie__time время
 
             
 

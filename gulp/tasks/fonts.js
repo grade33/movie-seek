@@ -76,8 +76,9 @@ export const fontStyle = () => {
             } else {
               fontWeight = 400;
             }
+            let fontStyle = fontFileName.toLowerCase().includes('italic') ? 'italic' : 'normal';
             fs.appendFile(fontsFile,
-              `@font-face {\n\t font-family: ${fontName};\n\t font-display: swap;\n\t src: url("fonts/${fontFileName}.woff2") format("woff2"), url("fonts/${fontFileName}.woff") format("woff");\n\t font-weight: ${fontWeight};\n\t font-style: normal;\n }\r\n`, cb);
+              `@font-face {\n\t font-family: ${fontName};\n\t font-display: swap;\n\t src: url("fonts/${fontFileName}.woff2") format("woff2"), url("fonts/${fontFileName}.woff") format("woff");\n\t font-weight: ${fontWeight};\n\t font-style: ${fontStyle};\n }\r\n`, cb);
             newFileOnly = fontFileName;
           }
         }

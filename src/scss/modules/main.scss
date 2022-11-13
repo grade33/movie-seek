@@ -187,6 +187,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     transition: color .3s ease-in-out;
+
     &:hover {
       color: $cyan;
     }
@@ -359,5 +360,112 @@
 
   .movie-card__poster {
     min-height: 318px;
+  }
+}
+
+.movie {
+  height: 95%;
+  width: 95%;
+
+  &__content {
+    padding: 0px 30px 30px;
+    display: flex;
+    gap: 50px;
+  }
+
+  &__poster {
+    &-wrap {
+      width: 25%;
+      flex: none;
+    }
+
+    border-radius: 10px;
+  }
+
+  &__info {
+    width: 550px;
+  }
+
+  &__main {
+    margin-bottom: 50px;
+  }
+
+  &__title-release {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 15px;
+  }
+
+  &__title {}
+
+  &__release {
+    font-size: 40px;
+  }
+
+  &__title-original-certification {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $black-06;
+    margin-bottom: 15px;
+  }
+
+  &__title-original {
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  &__certification {
+    font-size: 12px;
+    padding: 1px 3px;
+    line-height: 1;
+    border-radius: 5px;
+    border: 1px solid $black-06;
+  }
+
+  &__about {
+    &-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &-heading {
+      flex: none;
+      width: 160px;
+      color: $black-06;
+    }
+
+    &-text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+
+      &_age {
+        padding: 1px 3px;
+        font-weight: 600;
+        border: 1px solid $black-06;
+        border-radius: 4px;
+      }
+    }
   }
 }
