@@ -270,23 +270,83 @@ input {
   z-index: 50;
   background: rgba($black, .5);
   backdrop-filter: blur(10px);
+  transition: opacity .3s ease-in-out,
+    visibility .3s ease-in-out;
 }
 
 .popup {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
   margin: auto;
-  width: 50%;
-  height: 50%;
   color: $black;
-  background: $white;
   border-radius: 15px;
-  padding: 15px 0;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: rotate(45deg);
+      width: 100%;
+      height: 3px;
+      background: $black;
+      border-radius: 5px;
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
   &>* {
-    max-height: 100%;
-    overflow-y: scroll;
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.trailer-popup {
+  width: 70%;
+  height: 90%;
+  &__container {
+    width: 100%;
+    height: 100%;
+  }
+  &__iframe {
+    width: 100%;
+    height: 99%;
+  }
+  iframe {
+    border-radius: 15px;
+  }
+}
+
+.video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }

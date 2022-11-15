@@ -6,6 +6,7 @@ $sm: 575.98px;
 
 $white: #f9f9f9;
 $black: #0c0c0c;
+$black-light: #333;
 $black-06: rgba(0, 0, 0, .6);
 $gray: #afafaf;
 $gray-dark: #808080;
@@ -25,19 +26,19 @@ body {
   --container: 1440px;
   --gap: 16px;
 
-  @media(max-width: $xl) {
-    --container: 0px;
-  }
+  // @media(max-width: $xl) {
+  //   --container: 0px;
+  // }
 
-  @media(max-width: $lg) {
-    --container: 0px;
-  }
+  // @media(max-width: $lg) {
+  //   --container: 0px;
+  // }
 
-  @media(max-width: $md) {
-    --container: 0px;
-  }
+  // @media(max-width: $md) {
+  //   --container: 0px;
+  // }
 
-  @media(max-width: $sm) {
-    --container: 100%;
-  }
+  // @media(max-width: $sm) {
+  //   --container: 100%;
+  // }
 }

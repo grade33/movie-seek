@@ -104,6 +104,9 @@ export class FillSection {
     for (const cinema of cinemaList) {
       let cinemaCardEl = htmlData.cinemaCard(this.sectionSettings.type === 'scrollbar');
 
+      const openCinemaInfoBtn = cinemaCardEl.querySelector(cssSelData.openCinemaInfoBtn);
+      openCinemaInfoBtn.dataset.cinemaType = this.sectionSettings.cinemaType;
+      openCinemaInfoBtn.dataset.cinemaId = cinema.id;
       const imgEl = cinemaCardEl.querySelector(cssSelData.cinemaImg);
       const ratingEl = cinemaCardEl.querySelector(cssSelData.cinemaRating);
       const titleEl = cinemaCardEl.querySelector(cssSelData.cinemaTitle);

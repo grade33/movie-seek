@@ -1,12 +1,11 @@
 import { cssSelData } from './modules/data.js';
-import { setPaddingStantHeader, openCloseGenreFilter, fillPromoContent } from './modules/helpFunctions.js';
-import { FillCinemaContent } from './classes/FillCinemaContent.js';
+import { setPaddingStantHeader, handlerOpenCloseGenre, fillPromoContent, handlerRemoveOverlay, openCinemaInfo } from './modules/helpFunctions.js';
 import { FillPage } from './classes/FillPage.js';
 
 setPaddingStantHeader();
-openCloseGenreFilter();
+handlerOpenCloseGenre();
+handlerRemoveOverlay();
+openCinemaInfo();
 
 fillPromoContent(cssSelData.promo, 94997, 'tv');
 new FillPage();
-
-new FillCinemaContent('.js-movie', 436270, 'movie');

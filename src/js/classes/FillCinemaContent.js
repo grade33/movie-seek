@@ -1,49 +1,70 @@
-import { apiData } from '../modules/data.js';
+import { apiData, cssSelData, htmlData } from '../modules/data.js';
 import { getRequestData, setRatingColor } from '../modules/helpFunctions.js';
 
 export class FillCinemaContent {
-  constructor(selector, movieId, cinemaType) {
-    this.cinema = document.querySelector(selector);
+  constructor(movieId, cinemaType) {
+    this.сinemaPopup = htmlData.cinemaPopup();
+    document.querySelector('#app').append(this.сinemaPopup);
+
+    this.cinemaEl = this.сinemaPopup.querySelector(cssSelData.moviePopup);
+    this.cinemaLeftEl = this.cinemaEl.querySelector(`${cssSelData.moviePopup}__left`);
+
     this.elem = {
-      poster: this.cinema.querySelector(`${selector}__poster`),
-      title: this.cinema.querySelector(`${selector}__title`),
-      releaseYearTitle: this.cinema.querySelector(`${selector}__release`),
-      titleOriginal: this.cinema.querySelector(`${selector}__title-original`),
-      certificationTitle: this.cinema.querySelector(`${selector}__certification-title`),
-      overview: this.cinema.querySelector(`${selector}__overview`),
-      releaseYear: this.cinema.querySelector(`${selector}__release-year`),
-      country: this.cinema.querySelector(`${selector}__country`),
-      genre: this.cinema.querySelector(`${selector}__genre`),
-      slogan: this.cinema.querySelector(`${selector}__slogan`),
-      directing: this.cinema.querySelector(`${selector}__directing`),
-      writing: this.cinema.querySelector(`${selector}__writing`),
-      production: this.cinema.querySelector(`${selector}__production`),
-      camera: this.cinema.querySelector(`${selector}__camera`),
-      sound: this.cinema.querySelector(`${selector}__sound`),
-      art: this.cinema.querySelector(`${selector}__art`),
-      editing: this.cinema.querySelector(`${selector}__editing`),
-      budget: this.cinema.querySelector(`${selector}__budget`),
-      revenue: this.cinema.querySelector(`${selector}__revenue`),
-      premiere: this.cinema.querySelector(`${selector}__premiere`),
-      certification: this.cinema.querySelector(`${selector}__certification`),
-      time: this.cinema.querySelector(`${selector}__time`),
+      poster: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__poster`),
+      voteAverage: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__vote-average`),
+      voteCount: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__vote-count`),
+      actorList: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__actors-list`),
+      title: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__title`),
+      releaseTitle: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__release`),
+      titleOriginal: this.cinemaEl.querySelector(
+        `${cssSelData.moviePopup}__title-original`
+      ),
+      contentRatingTitle: this.cinemaEl.querySelector(
+        `${cssSelData.moviePopup}__certification-title`
+      ),
+      overview: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__overview`),
+      releaseYear: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__release-year`),
+      country: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__country`),
+      genre: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__genre`),
+      slogan: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__slogan`),
+      directing: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__directing`),
+      writing: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__writing`),
+      production: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__production`),
+      camera: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__camera`),
+      sound: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__sound`),
+      art: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__art`),
+      editing: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__editing`),
+      budget: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__budget`),
+      revenue: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__revenue`),
+      premiere: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__premiere`),
+      certification: this.cinemaEl.querySelector(
+        `${cssSelData.moviePopup}__certification`
+      ),
+      time: this.cinemaEl.querySelector(`${cssSelData.moviePopup}__time`),
     };
 
+    this.data = {};
+
     this.cinemaType = cinemaType;
-    this.movieId = movieId;
-    this.mainQueryType = `/${this.cinemaType}/${this.movieId}`;
-    this.creditsQueryType = `${this.mainQueryType}/credits`;
-    this.certificationQueryType = `${this.mainQueryType}/release_dates`;
+
+    this.mainQuery = `/${cinemaType}/${movieId}`;
+    this.creditsQuery = `${this.mainQuery}/credits`;
+    this.videoQuery = `${this.mainQuery}/videos`;
+    if (cinemaType === 'movie') {
+      this.contentRatingQuery = `${this.mainQuery}/release_dates`;
+    } else if (cinemaType === 'tv') {
+      this.contentRatingQuery = `${this.mainQuery}/content_ratings`;
+    }
     this.querySetting = '&language=ru';
 
-    this.certification = null;
-    this.release = null;
+    this.contentRating = null;
+    this.releaseDate = null;
 
-    this.clearAllTextContent();
-    this.fillMovieContent();
+    this.clearElemsInner();
+    this.setContent();
   }
 
-  clearAllTextContent() {
+  clearElemsInner() {
     for (const key in this.elem) {
       if (Object.hasOwnProperty.call(this.elem, key)) {
         const elem = this.elem[key];
@@ -52,120 +73,210 @@ export class FillCinemaContent {
     }
   }
 
-  async getDatas() {
-    this.mainData = await getRequestData({
-      queryType: this.mainQueryType,
-      querySetting: this.querySetting,
-    });
-    this.creditsData = await getRequestData({
-      queryType: this.creditsQueryType,
-      querySetting: this.querySetting,
-    });
-    this.ratingMPAAData = await getRequestData({
-      queryType: this.certificationQueryType,
-      querySetting: this.querySetting,
-    });
-  }
-
-  async fillMovieContent() {
+  async setContent() {
     await this.getDatas();
 
-    for (const result of this.ratingMPAAData.results) {
-      if (result.iso_3166_1 === 'US') {
-        this.certification = result.release_dates[0].certification;
+    for (const countryRelease of this.data.contentRating.results) {
+      if (countryRelease.iso_3166_1 === 'US') {
+        if (this.cinemaType == 'movie') {
+          for (const release of countryRelease.release_dates) {
+            if (release.certification) this.contentRating = release.certification;
+          }
+        } else if (this.cinemaType == 'tv') {
+          this.contentRating = countryRelease.rating;
+        }
       }
     }
-    this.release = new Date(this.mainData.release_date);
 
-    this.#setHeading();
+    if (this.cinemaType === 'movie') {
+      this.releaseDate = new Date(this.data.main.release_date);
+    } else if (this.cinemaType === 'tv') {
+      this.releaseDate = [];
+      this.releaseDate.push(new Date(this.data.main.first_air_date));
+      this.releaseDate.push(new Date(this.data.main.last_air_date));
+    }
+
+    this.#setMainContent();
+
     this.#setAboutCinema();
+    this.#processEmptyTextContent();
   }
 
-  #setHeading() {
+  async getDatas() {
+    this.data.main = await getRequestData({
+      queryType: this.mainQuery,
+      querySetting: this.querySetting,
+    });
+    this.data.credits = await getRequestData({
+      queryType: this.creditsQuery,
+    });
+    this.data.video = await getRequestData({
+      queryType: this.videoQuery,
+    });
+    this.data.contentRating = await getRequestData({
+      queryType: this.contentRatingQuery,
+    });
+
+    console.log(this.data.main);
+    console.log(this.data.credits);
+    console.log(this.data.contentRating);
+    console.log(this.data.video);
+  }
+
+  #setMainContent() {
+    // Left Block
     const imgPathBase = apiData.imgBaseURL + apiData.imgFileSize.original;
+    this.elem.poster.src = imgPathBase + this.data.main.poster_path;
+    this.elem.poster.alt = this.data.main.title || this.data.main.name;
 
-    this.elem.poster.src = imgPathBase + this.mainData.poster_path;
-    this.elem.poster.alt = this.mainData.title;
+    this.#addTrailer();
 
-    this.elem.title.textContent = this.mainData.title;
-    this.elem.releaseYearTitle.textContent = `(${this.release.getFullYear()})`;
+    // Center Block
+    this.elem.title.textContent = this.data.main.title || this.data.main.name;
 
-    this.elem.titleOriginal.textContent = this.mainData.original_title;
-    this.elem.certificationTitle.textContent = this.certification;
-
-    this.elem.overview.textContent = this.mainData.overview;
-
-    this.elem.releaseYear.textContent = this.release.getFullYear();
-  }
-
-  #setCrew() {
-    for (const person of this.creditsData.crew) {
-      switch (person.known_for_department.toLowerCase()) {
-        case 'directing':
-          this.elem.directing.textContent += person.name + '  ';
-          break;
-        case 'writing':
-          this.elem.writing.textContent += person.name + '  ';
-          break;
-        case 'production':
-          this.elem.production.textContent += person.name + '  ';
-          break;
-        case 'camera':
-          this.elem.camera.textContent += person.name + '  ';
-          break;
-        case 'sound':
-          this.elem.sound.textContent += person.name + '  ';
-          break;
-        case 'art':
-          this.elem.art.textContent += person.name + '  ';
-          break;
-        case 'editing':
-          this.elem.editing.textContent += person.name + '  ';
-          break;
-        default:
-          break;
+    if (this.cinemaType === 'movie') {
+      this.elem.releaseTitle.textContent = `(${this.releaseDate.getFullYear()})`;
+    } else if (this.cinemaType === 'tv') {
+      if (this.data.main.in_production) {
+        this.elem.releaseTitle.textContent = `(${this.releaseDate[0].getFullYear()} - ...)`;
+      } else {
+        this.elem.releaseTitle.textContent = `(${this.releaseDate[0].getFullYear()} - ${this.releaseDate[1].getFullYear()})`;
       }
     }
-    this.elem.directing.textContent = this.elem.directing.textContent.trim().split('  ').join(', ');
-    this.elem.writing.textContent = this.elem.writing.textContent.trim().split('  ').join(', ');
-    this.elem.production.textContent = this.elem.production.textContent
-      .trim()
-      .split('  ')
-      .join(', ');
-    this.elem.camera.textContent = this.elem.camera.textContent.trim().split('  ').join(', ');
-    this.elem.sound.textContent = this.elem.sound.textContent.trim().split('  ').join(', ');
-    this.elem.art.textContent = this.elem.art.textContent.trim().split('  ').join(', ');
-    this.elem.editing.textContent = this.elem.editing.textContent.trim().split('  ').join(', ');
+
+    this.elem.titleOriginal.textContent =
+      this.data.main.original_title || this.data.main.original_name;
+    if (this.contentRating) {
+      this.elem.contentRatingTitle.textContent = this.contentRating;
+    } else {
+      this.elem.contentRatingTitle.remove();
+    }
+
+    this.elem.overview.textContent = this.data.main.overview;
+
+    // Right Block
+    this.elem.voteAverage.textContent = this.data.main.vote_average;
+    setRatingColor(this.elem.voteAverage, true);
+    this.elem.voteCount.textContent = new Intl.NumberFormat('ru-RU').format(
+      this.data.main.vote_count
+    );
+
+    for (const person of this.data.credits.cast) {
+      this.elem.actorList.append(htmlData.actorItem(person.name));
+    }
+  }
+  #addTrailer() {
+    let videoKey;
+    let videoName;
+    for (let i = 0; i < this.data.video.results.length; i++) {
+      const videoSettings = this.data.video.results[i];
+      const videoSite = videoSettings.site.toLowerCase();
+      const videoType = videoSettings.type.toLowerCase();
+      if (!(videoSite === 'youtube' && videoType === 'trailer')) continue;
+
+      videoKey = videoSettings.key;
+      videoName = videoSettings.name;
+      break;
+    }
+    if (!(videoKey || videoName)) return;
+
+    const trailerBtn = htmlData.trailerBtn(videoKey, videoName);
+    this.cinemaLeftEl.append(trailerBtn);
+
+    trailerBtn.addEventListener('click', () => {
+      const trailerPopup = htmlData.trailerPopup(videoKey);
+      document.querySelector('#app').append(trailerPopup);
+    });
   }
 
   #setAboutCinema() {
-    for (const country of this.mainData.production_countries) {
-      this.elem.country.textContent += country.iso_3166_1 + '  ';
+    if (this.cinemaType == 'movie') {
+      this.elem.releaseYear.textContent = this.releaseDate.getFullYear();
+    } else if (this.cinemaType == 'tv') {
+      const seasonCount = this.data.main.number_of_seasons;
+      let seasonText;
+      if (seasonCount === 1) seasonText = `(${seasonCount} сезон)`;
+      else if (seasonCount > 1 && seasonCount < 5) seasonText = `(${seasonCount} сезона)`;
+      else seasonText = `(${seasonCount} сезонов)`;
+      this.elem.releaseYear.textContent =
+        this.releaseDate[0].getFullYear() + ' ' + seasonText;
     }
-    this.elem.country.textContent.trim().split('  ').join(', ');
 
-    for (const genre of this.mainData.genres) {
-      this.elem.genre.textContent += genre.name[0].toUpperCase() + genre.name.slice(1) + '  ';
+    const countryArr = [];
+    for (const country of this.data.main.production_countries) {
+      countryArr.push(country.iso_3166_1);
     }
-    this.elem.genre.textContent.trim().split('  ').join(', ');
+    this.#separateTextCommans(countryArr, this.elem.country);
 
-    this.elem.slogan.textContent = this.mainData.tagline;
+    const genreArr = [];
+    for (const genre of this.data.main.genres) {
+      genreArr.push(genre.name[0].toUpperCase() + genre.name.slice(1));
+    }
+    this.#separateTextCommans(genreArr, this.elem.genre);
+
+    const tagline = this.data.main.tagline;
+    if(tagline) {
+      this.elem.slogan.textContent = tagline.includes('«') ? tagline : '«' + tagline + '»';
+    }
 
     this.#setCrew();
 
-    this.elem.budget.textContent =
-      '$' + new Intl.NumberFormat('ru-RU').format(this.mainData.budget);
-    this.elem.revenue.textContent =
-      '$' + new Intl.NumberFormat('ru-RU').format(this.mainData.revenue);
+    if (this.cinemaType === 'movie') {
+      const formatedBudget = new Intl.NumberFormat('ru-RU').format(this.data.main.budget);
+      this.elem.budget.textContent = formatedBudget == 0 ? null : '$' + formatedBudget;
+      const formatedRevenue = new Intl.NumberFormat('ru-RU').format(
+        this.data.main.revenue
+      );
+      this.elem.revenue.textContent = formatedRevenue == 0 ? null : '$' + formatedRevenue;
+    } else if (this.cinemaType === 'tv') {
+      this.elem.budget.closest(cssSelData.moviePopupAboutItem).remove();
+      this.elem.revenue.closest(cssSelData.moviePopupAboutItem).remove();
+    }
 
-    this.elem.certification.textContent = this.certification;
+    this.elem.certification.textContent = this.contentRating;
 
-    this.elem.premiere.textContent = new Intl.DateTimeFormat().format(this.release);
+    this.elem.premiere.textContent = new Intl.DateTimeFormat().format(
+      this.releaseDate[0] || this.releaseDate
+    );
 
-    let hours = Math.trunc(this.mainData.runtime / 60);
-    hours = hours < 10 ? '0' + hours : hours;
-    let minutes = this.mainData.runtime % 60;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    this.elem.time.textContent = `${this.mainData.runtime}мин. / ${hours}:${minutes}`;
+    // let hours = Math.trunc(this.data.main.runtime / 60);
+    // hours = hours < 10 ? '0' + hours : hours;
+    // let minutes = this.data.main.runtime % 60;
+    // minutes = minutes < 10 ? '0' + minutes : minutes;
+    // this.elem.time.textContent = `${this.data.main.runtime}мин. / ${hours}:${minutes}`;
+  }
+  #setCrew() {
+    const departaments = {
+      directing: [],
+      writing: [],
+      production: [],
+      camera: [],
+      sound: [],
+      art: [],
+      editing: [],
+    };
+    for (const person of this.data.credits.crew) {
+      const personDepartament = person.known_for_department.toLowerCase();
+      if (departaments[personDepartament]) {
+        departaments[personDepartament].push(person.name);
+      }
+    }
+    for (const key in departaments) {
+      const departamentArr = departaments[key];
+      this.#separateTextCommans(departamentArr, this.elem[key]);
+    }
+  }
+
+  #processEmptyTextContent() {
+    for (const key in this.elem) {
+      if (Object.hasOwnProperty.call(this.elem, key)) {
+        const elem = this.elem[key];
+        if (!elem.textContent) elem.textContent = '—';
+      }
+    }
+  }
+
+  #separateTextCommans(arr, elem) {
+    elem.textContent = arr.join(', ');
   }
 }

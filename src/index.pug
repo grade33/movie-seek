@@ -22,7 +22,7 @@ html(lang="ru")
             button.header__search-btn(type="submit") 
               svg.header__search-icon
                 use(xlink:href="@img/sprite.svg#loupe")
-          .header__sign
+          //- .header__sign
             button.header__sign-btn.header__sign-in(type="button") Войти
             button.header__sign-btn.header__sign-up(type="button") Зарегистрироватся
 
@@ -43,20 +43,20 @@ html(lang="ru")
                 svg.nav__icon
                   use(xlink:href="@img/sprite.svg#serials")
                 span.nav__text Сериалы
-              button.nav__link(type="button") 
-                svg.nav__icon
-                  use(xlink:href="@img/sprite.svg#actor")
-                span.nav__text Актеры
+              //- button.nav__link(type="button") 
+              //-   svg.nav__icon
+              //-     use(xlink:href="@img/sprite.svg#actor")
+              //-   span.nav__text Актеры
 
         main.main.js-main
           section.promo.js-promo
             .container.promo__container 
               .promo__content
                 span.js-promo__rating.promo__rating.rating
-                a.promo__link(href="#") 
+                button.js-open-cinema.promo__link(type="button") 
                 .promo__info
                   h3.promo__title 
-                    button.js-promo__title(type="button")
+                    button.js-promo__title.js-open-cinema(type="button")
                   p.js-promo__overview.promo__overview
                   ul.promo__structure
                     li.promo__structure-item
@@ -87,93 +87,28 @@ html(lang="ru")
                     a.footer__text(href="#") Сериалы
                   li.footer__item 
                     a.footer__text(href="#") Актеры
-              .footer__block.col-2
-                .footer__title Аккаунт
-                ul.footer__list 
-                  li.footer__item 
-                    button.footer__text(type="button") Вход
-                  li.footer__item 
-                    button.footer__text(type="button") Регистрация
+              //- .footer__block.col-2
+              //-   .footer__title Аккаунт
+              //-   ul.footer__list 
+              //-     li.footer__item 
+              //-       button.footer__text(type="button") Вход
+              //-     li.footer__item 
+              //-       button.footer__text(type="button") Регистрация
+            
             .footer__bottom 
               span.footer__copyright Copyright © 2022. All rights reserved.
               .footer__info
                 a.footer__info-link(href='#') Terms of use
                 a.footer__info-link(href='#') Privacy policy
 
-    .overlay 
-      .popup.movie.js-movie
-        .container.movie__container
-          .movie__content
-            .movie__poster-wrap 
-              img.movie__poster.js-movie__poster(src="", alt="")
-            .movie__info
-              .movie__main
-                .movie__title-release
-                  h2.movie__title.js-movie__title Название
-                  span.movie__release.js-movie__release Релиз
-                .movie__title-original-certification
-                  span.movie__title-original.js-movie__title-original Name
-                  span.movie__certification.js-movie__certification-title ?+
-                p.movie__overview.js-movie__overview overview
-              .movie__about 
-                h2.movie__about-title О фильме
-                ul.movie__about-list
-                  li.movie__about-item 
-                    span.movie__about-heading Год производства
-                    span.movie__about-text.js-movie__release-year Год релиза
-                  li.movie__about-item 
-                    span.movie__about-heading Страна
-                    span.movie__about-text.js-movie__country Страна
-                  li.movie__about-item 
-                    span.movie__about-heading Жанр
-                    span.movie__about-text.js-movie__genre жанр
-                  li.movie__about-item 
-                    span.movie__about-heading Слоган
-                    span.movie__about-text.js-movie__slogan слоган
-                  li.movie__about-item 
-                    span.movie__about-heading Режиссер
-                    span.movie__about-text.js-movie__directing режисёр
-                  li.movie__about-item 
-                    span.movie__about-heading Сценарий
-                    span.movie__about-text.js-movie__writing Райан Кондал, Джордж Р.Р. Мартин, Чармэйн Де Грейт
-                  li.movie__about-item 
-                    span.movie__about-heading Продюсер
-                    span.movie__about-text.js-movie__production продюсер
-                  li.movie__about-item 
-                    span.movie__about-heading Оператор
-                    span.movie__about-text.js-movie__camera оператор
-                  li.movie__about-item 
-                    span.movie__about-heading Композитор
-                    span.movie__about-text.js-movie__sound композитр
-                  li.movie__about-item 
-                    span.movie__about-heading Художник
-                    span.movie__about-text.js-movie__art Клер Килнер, Мигель Сапочник, Грег Яйтанс, ...
-                  li.movie__about-item 
-                    span.movie__about-heading Монтаж
-                    span.movie__about-text.js-movie__editing
-                  li.movie__about-item 
-                    span.movie__about-heading Бюджет
-                    span.movie__about-text.js-movie__budget
-                  li.movie__about-item 
-                    span.movie__about-heading Сборы
-                    span.movie__about-text.js-movie__revenue
-                  li.movie__about-item 
-                    span.movie__about-heading Премьера в мире
-                    span.movie__about-text.js-movie__premiere
-                  li.movie__about-item 
-                    span.movie__about-heading Рейтинг MPAA
-                    span.movie__about-text.movie__about-text_age.js-movie__certification ?+
-                  li.movie__about-item 
-                    span.movie__about-heading Время
-                    span.movie__about-text.js-movie__time время
-
-            
+             
 
 
 
-            
-          
-       
+
+
+
+
 
 
 

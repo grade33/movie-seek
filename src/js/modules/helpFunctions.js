@@ -1,3 +1,4 @@
+import { FillCinemaContent } from '../classes/FillCinemaContent.js';
 import { cssSelData, apiData } from './data.js';
 
 export function delegate(box, eventName, selector, handler) {
@@ -17,7 +18,23 @@ export function setPaddingStantHeader() {
   aside.style.top = header.offsetHeight + 'px';
 }
 
-export function openCloseGenreFilter() {
+export function handlerRemoveOverlay() {
+  document.addEventListener('click', (e) => {
+    const overlay = e.target.closest('.overlay');
+    const popup = e.target.closest('.popup');
+    const closeBtn = e.target.closest('.popup__close');
+    if (!(closeBtn || e.target === popup || (overlay && !popup))) return;
+
+    overlay.style.opacity = 0;
+    overlay.style.visibility = 'hidden';
+    overlay.addEventListener('transitionend', function handler() {
+      overlay.remove();
+      overlay.removeEventListener('transitionend', handler);
+    });
+  });
+}
+
+export function handlerOpenCloseGenre() {
   document.addEventListener('click', (e) => {
     const genreListActive = document.querySelector('.catalog__filter-list_active');
     const genre = e.target.closest('.catalog__filter');
@@ -55,6 +72,11 @@ export async function fillPromoContent(selector, movieId, cinemaType) {
   const poster = promo.querySelector(`${selector}__poster`);
   const rating = promo.querySelector(`${selector}__rating`);
 
+  promo.querySelectorAll(cssSelData.openCinemaInfoBtn).forEach((openCinemaInfoBtn) => {
+    openCinemaInfoBtn.dataset.cinemaType = cinemaType;
+    openCinemaInfoBtn.dataset.cinemaId = movieId;
+  });
+
   const mainQueryType = `/${cinemaType}/${movieId}`;
   const creditsQueryType = `${mainQueryType}/credits`;
   const querySetting = '&language=ru';
@@ -84,6 +106,14 @@ export async function fillPromoContent(selector, movieId, cinemaType) {
   setRatingColor(rating);
 }
 
+export function setRatingColor(ratingEl, fillColor = false) {
+  const fill = fillColor ? 'color' : 'background';
+  ratingEl.textContent = Number(ratingEl.textContent).toFixed(1);
+  if (+ratingEl.textContent === 0) ratingEl.remove();
+  else if (+ratingEl.textContent >= 7) ratingEl.style[fill] = '#007b00';
+  else if (+ratingEl.textContent < 5) ratingEl.style[fill] = '#ff0b0b';
+}
+
 export async function getRequestData({
   queryType,
   querySetting = '',
@@ -101,9 +131,14 @@ export async function getRequestData({
   return data;
 }
 
-export function setRatingColor(ratingEl) {
-  ratingEl.textContent = Number(ratingEl.textContent).toFixed(1);
-  if (+ratingEl.textContent === 0) ratingEl.remove();
-  else if (+ratingEl.textContent >= 7) ratingEl.style.background = '#007b00';
-  else if (+ratingEl.textContent < 5) ratingEl.style.background = '#ff0b0b';
+export function openCinemaInfo() {
+  document.addEventListener('click', (e) => {
+    const openCinemaInfoBtn = e.target.closest(cssSelData.openCinemaInfoBtn);
+    if (!openCinemaInfoBtn) return;
+
+    new FillCinemaContent(
+      openCinemaInfoBtn.dataset.cinemaId,
+      openCinemaInfoBtn.dataset.cinemaType
+    );
+  });
 }
